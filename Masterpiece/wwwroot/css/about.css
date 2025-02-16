@@ -1,0 +1,81 @@
+﻿body {
+}
+
+/**********about us************/
+
+.page-header {
+    margin-bottom: 6rem;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(/img/head.jpg) center center no-repeat;
+    background-size: cover;
+    height: 375px;
+}
+
+    .page-header h1 {
+        text-align: center;
+        padding-top: 175px;
+        color: #F5EFE7;
+    }
+
+/******************************/
+.img-twice::before {
+    position: absolute;
+    content: "";
+    width: 60%;
+    height: 80%;
+    top: 10%;
+    left: 20%;
+    background: var(--primary);
+    border: 25px solid var(--light);
+    border-radius: 6px;
+    z-index: -1;
+}
+
+/**************Gallery***************/
+.galleryimg {
+    padding-top: 100px;
+}
+
+
+
+/***********************Counter*********************/
+.container {
+    margin-top: 100px;
+}
+
+.counter-box {
+    display: block;
+    background: #fdf8f4;
+    padding: 40px 20px 37px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+    .counter-box p {
+        margin: 5px 0 0;
+        color: #909090;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .counter-box i {
+        font-size: 60px;
+        margin-bottom: 15px;
+        color: #5F6759;
+    }
+
+.counter {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: #666;
+}
+
+.counter-box.colored {
+    background: #5F6759;
+}
+
+    .counter-box.colored p,
+    .counter-box.colored i,
+    .counter-box.colored .counter {
+        color: #F6F4F0;
+    }
