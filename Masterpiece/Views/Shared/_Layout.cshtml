@@ -6,6 +6,10 @@
     <title>@ViewData["Title"] - Masterpiece</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/about.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/contact.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/speicalOrder.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Masterpiece.styles.css" asp-append-version="true" />
 
 	<!-- Bootstrap 5 CSS -->
@@ -35,27 +39,42 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html" href="javascript:void(0);">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/HTML/services.html" href="javascript:void(0);">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="specialOrder.html" href="javascript:void(0);">Special Order</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="aboutUs.html" href="javascript:void(0);">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html" href="javascript:void(0);">Contact us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.html" href="javascript:void(0);"><i class="fa fa-user" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="checkout.html" href="javascript:void(0);"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                    </li>
+                    @* <li class="nav-item"> *@
+                    @*     <a class="nav-link" href="home.html" href="javascript:void(0);">Home</a> *@
+                    @* </li> *@
+                    @* <li class="nav-item active"> *@
+                    @*     <a class="nav-link" href="/HTML/services.html" href="javascript:void(0);">Services</a> *@
+                    @* </li> *@
+                    @* <li class="nav-item"> *@
+                    @*     <a class="nav-link" href="specialOrder.html" href="javascript:void(0);">Special Order</a> *@
+                    @* </li> *@
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="services" asp-action="Index">Services</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="specialOrder" asp-action="Index">Special Order</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="aboutController1" asp-action="Index">About Us</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="contact" asp-action="Index">contact us</a>
+					</li>
+                    @* <li class="nav-item"> *@
+                    @*     <a class="nav-link" href="aboutUs.html" href="javascript:void(0);">About us</a> *@
+                    @* </li> *@
+                    @* <li class="nav-item"> *@
+                    @*     <a class="nav-link" href="contact.html" href="javascript:void(0);">Contact us</a> *@
+                    @* </li> *@
+                    @* <li class="nav-item"> *@
+                    @*     <a class="nav-link" href="profile.html" href="javascript:void(0);"><i class="fa fa-user" aria-hidden="true"></i></a> *@
+                    @* </li> *@
+                    @* <li class="nav-item"> *@
+                    @*     <a class="nav-link" href="checkout.html" href="javascript:void(0);"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a> *@
+                    @* </li> *@
                 </ul>
             </div>
         </nav>
