@@ -1,0 +1,58 @@
+﻿/*******************************edit Prfoile*********************************/
+.container h1 {
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.jumbotron-flat {
+    background-color: #D9E0D7;
+    height: 100%;
+    border: 1px solid #D9E0D7;
+    background: white;
+    width: 100%;
+    text-align: center;
+    overflow: auto;
+    color: var(--dark-color);
+}
+
+.paymentAmt {
+    color: var(--dark-color);
+    font-size: 80px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.title {
+    padding-top: 15px;
+    color: var(--dark-color);
+}
+
+.btn-save {
+    background-color: #5F6759;
+    ;
+    border: none;
+    height: 37px;
+    width: 120px;
+    border-radius: 5px;
+    color: #F5EFE7;
+    transition: all 0.6s ease-in-out;
+}
+
+
+    .btn-save:hover {
+        background-color: #C8D5C1;
+        color: #3E433B;
+        transform: translateY(-px);
+        /* background: transparent; */
+    }
+
+.btn-cancle {
+    background-color: #2222221c;
+    border: none;
+    height: 37px;
+    width: 120px;
+    border-radius: 5px;
+}

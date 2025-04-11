@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Masterpiece.Models.Category>
+
+@{
+    ViewData["Title"] = "category";
+}
+
+
+<section class="Herosection">
+    <!-- <img src="img/pexels-paul-wence-54184-1832562.jpg"  style="width: 100%; height: 450px;" > -->
+    <div class="page-header">
+        <h1>Our Services</h1>
+    </div>
+</section>
+
+<section class="container">
+
+    <div class="card-container">
+        @if (Model != null)
+{
+
+        @foreach (var item in Model)
+        {
+            <div class="card1 card">
+                <!-- Card Header -->
+                <div class="card-header">
+                    <!-- <div class="avatar">1</div> -->
+                    <div class="card-text">
+                        <h2 class="title">@item?.Name</h2>
+                    </div>
+                </div>
+
+                <!-- Card Image -->
+                <div class="card-image">
+
+                        <a asp-controller="services" asp-action="products" asp-route-id=@item.Id><img src=@item?.ImageUrl alt="Custom image for card-image"></a>
+                </div>
+                <!-- Card Actions -->
+                <div class="card-actions">
+                    <button class="action-btn" onclick="toggleContent()">+</button>
+                </div>
+                <!-- Card Content -->
+                <div class="card-content">
+                    <p>@item?.Description ?? "No description available."</p>
+                </div>
+
+            </div>
+        }
+        }
+
+        else{
+                <p>No data available.</p>
+        }
+    </div>
+</section>

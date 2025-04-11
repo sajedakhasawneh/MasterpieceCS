@@ -1,0 +1,115 @@
+﻿
+/********************************checkout**************************/
+
+.tab-container {
+    margin: 50px auto;
+    border: 1px solid #eee;
+    border-radius: 7px;
+    /* background-color: #fff; */
+    /* background-color: #F6F4F0; */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 700px;
+    /* box-shadow: #F6F4F0; */
+}
+
+.tab-content h3 {
+    text-align: center;
+}
+
+.tab-container .nav-tabs {
+    border-bottom: 2px solid #3E433B;
+}
+
+    .tab-container .nav-tabs .nav-link {
+        font-weight: 700;
+        color: #ccc;
+    }
+
+        .tab-container .nav-tabs .nav-link.active {
+            background-color: #fff;
+            color: #3E433B;
+            border-color: #3E433B;
+        }
+
+.numberCircle {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #3E433B;
+    text-align: center;
+    font-size: 10px;
+    margin-right: 8px;
+    display: inline-block;
+    line-height: 30px;
+}
+
+.divider {
+    width: 100%;
+    height: .5px;
+    background-color: lightgray;
+    margin: 10px 0;
+}
+
+.form-control {
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.button-finish {
+    background-color: #3E433B;
+    color: #F5EFE7;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+
+
+
+    .button-finish:hover {
+        background-color: #C8D5C1;
+        color: #3E433B;
+    }
+
+.button-cancle {
+    background-color: #7a7a78;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.pymt-radio .row-payment-method {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+    .pymt-radio .row-payment-method:last-child {
+        border-bottom: none;
+    }
+
+.select-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 15px;
+}
+
+.select-txt {
+    flex: 1;
+}
+
+.select-logo img {
+    width: 40px;
+    height: 40px;
+}

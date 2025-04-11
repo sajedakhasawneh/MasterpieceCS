@@ -1,0 +1,268 @@
+﻿@model IEnumerable<Masterpiece.Models.Product>
+
+<!-- Main Container -->
+<div class="container3 py-5">
+    <div class="row">
+
+        <!-- 🔹 Filter Sidebar -->
+        <aside class="filter-sidebar col-lg-3 col-md-4">
+            <h4>Filters</h4>
+            <form>
+                <!-- Category Filter -->
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <div>
+                        <input type="checkbox" id="jewelry"> <label for="jewelry">Jewelry</label><br>
+                        <input type="checkbox" id="decor"> <label for="decor">Decor</label><br>
+                        <input type="checkbox" id="fashion"> <label for="fashion">Fashion</label>
+                    </div>
+                </div>
+
+                <!-- Price Range Filter -->
+                <div class="mb-3">
+                    <label class="form-label">Price Range</label>
+                    <div>
+                        <input type="checkbox" id="under50"> <label for="under50">Under $50</label><br>
+                        <input type="checkbox" id="50to100"> <label for="50to100">$50 - $100</label><br>
+                        <input type="checkbox" id="over100"> <label for="over100">Over $100</label>
+                    </div>
+                </div>
+
+                <!-- Size Filter -->
+                <h6 class="fw-bold mt-3">Size</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="size1">
+                    <label class="form-check-label" for="size1">Small</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="size2">
+                    <label class="form-check-label" for="size2">Medium</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="size3">
+                    <label class="form-check-label" for="size3">Large</label>
+                </div>
+
+                <!-- Color Filter -->
+                <h6 class="fw-bold mt-3">Color</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="color" id="color1">
+                    <label class="form-check-label" for="color1">Black</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="color" id="color2">
+                    <label class="form-check-label" for="color2">Red</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="color" id="color3">
+                    <label class="form-check-label" for="color3">Blue</label>
+                </div>
+
+
+                <!-- Rating Filter -->
+                <div class="mb-3">
+                    <label class="form-label">Minimum Rating</label>
+                    <div>
+                        <input type="checkbox" id="star1"> <label for="star1">⭐</label><br>
+                        <input type="checkbox" id="star2"> <label for="star2">⭐⭐</label><br>
+                        <input type="checkbox" id="star3"> <label for="star3">⭐⭐⭐</label><br>
+                        <input type="checkbox" id="star4"> <label for="star4">⭐⭐⭐⭐</label><br>
+                        <input type="checkbox" id="star5"> <label for="star4">⭐⭐⭐⭐⭐</label>
+
+                    </div>
+                </div>
+
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn btn-filter w-100">Apply Filters</button>
+            </form>
+        </aside>
+
+        <!-- 🔹 Product Grid -->
+        <section class="col-lg-9 col-md-8 productGrid">
+            <div class="row g-4">
+                <!-- Product 1 -->
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card product-card">
+                            <img src=@item.ImageUrl class="card-img-top" alt="Product Image">
+                            <div class="card-body text-center">
+                                <!-- <h5 class="card-title">Handmade Necklace</h5> -->
+                                <p class="card-text">
+                                    @item.Name
+                                </p>
+                                <p class="fw-bold">@item.Price</p>
+                                <div class="rating">
+                     
+
+                                </div>
+                                <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @* 
+
+                <!-- Product 2 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candle10.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Handmade Earrings</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">17.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐☆★
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candle8.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">7.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candles1000.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">10.50 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Product 5 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/product.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">5.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Product 6 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candle115.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">12.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Product 7 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candle133.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">9.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Product 8 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candle111.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">12.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Product 9 -->
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="/img/candle2.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body text-center">
+                            <!-- <h5 class="card-title">Decorative Vase</h5> -->
+                            <p class="card-text">
+                                Handmade Flower Scented
+                                Container Candle
+                            </p>
+                            <p class="fw-bold">19.99 JD</p>
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="/HTML/checkout.html"><button class="btn add-to-cart mt-2">Add to Cart</button></a>
+                        </div>
+                    </div>
+                </div>
+ *@
+                <!-- Add 6 more products using the same structure -->
+            </div>
+        </section>
+    </div>
+</div>

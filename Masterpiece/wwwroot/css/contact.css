@@ -52,7 +52,7 @@ iframe {
     flex-wrap: wrap;
     width: 100%;
     gap: 10%;
-    padding-top: 8rem;
+    padding-top: 4rem;
 }
 
 
@@ -180,7 +180,7 @@ textarea {
     font-family: "Poppins", sans-serif;
     /* background-color: #e6edf7; */
     color: #202020;
-    padding-top: 115px;
+    padding-top: 25px;
     padding-bottom: 50px;
     padding-left: 150px;
     width: 88%;

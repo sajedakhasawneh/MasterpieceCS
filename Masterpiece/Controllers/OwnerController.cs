@@ -2,7 +2,7 @@
 
 namespace Masterpiece.Controllers
 {
-    public class aboutController1 : Controller
+    public class OwnerController : Controller
     {
         public IActionResult Index()
         {

@@ -1,0 +1,99 @@
+﻿@model Masterpiece.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<section class="user-authentication">
+    <div class="user_options-container">
+        <div class="user_options-text">
+            <div class="user_options-unregistered">
+                <h2 class="user_unregistered-title">Don't have an account?</h2>
+                <p class="user_unregistered-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis nibh in leo lacinia blandit et quis lorem.</p>
+                <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+            </div>
+
+            <div class="user_options-registered">
+                <h2 class="user_registered-title">Have an account?</h2>
+                <p class="user_registered-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis nibh in leo lacinia blandit et quis lorem.</p>
+                <button class="user_registered-login" id="login-button">Login</button>
+            </div>
+        </div>
+
+        <div class="user_options-forms" id="user_options-forms">
+            <div class="user_forms-login">
+                <h2 class="forms_title">Login</h2>
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+                <form class="forms_form" asp-controller="User" asp-action="Login">
+                    <fieldset class="forms_fieldset">
+                        <div class="forms_field">
+                            <input asp-for="Email" class="forms_field-input" placeholder="Email" required autofocus />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="forms_field">
+                            <input asp-for="Password" class="forms_field-input" placeholder="Password" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                    <div class="forms_buttons">
+                        <button type="button" class="forms_buttons-forgot" id="forget-button">Forgot password?</button>
+                        <button type="submit" class="forms_buttons-action">Login</button>
+                        <a class="forms_buttons-mb-button" id="signup-button-mb">Sign up</a>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="user_forms-signup">
+                @* <h2 class="forms_title">Sign Up</h2> *@
+                <form class="forms_form" asp-action="Register">
+                    <fieldset class="forms_fieldset">
+                        <div class="forms_field">
+                            <input asp-for="Name" class="forms_field-input" placeholder="Full Name" required />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="forms_field">
+                            <input asp-for="Email" class="forms_field-input" placeholder="Email" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Role" class="forms_field-input"></label>
+                            <select asp-for="Role" class="forms_field-input" asp-items="ViewBag.RoleList">
+                                <option class="forms_field-input" value="">-- Select Role --</option>
+                            </select> 
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                        <div class="forms_field">
+                            <input asp-for="Password" class="forms_field-input" placeholder="Password" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                    <div class="forms_buttons">
+                        <button type="submit" class="forms_buttons-action">Sign up</button>
+                        <a class="forms_buttons-mb-button" id="login-button-mb">Login</a>
+                    </div>
+                </form>
+
+
+            </div>
+            <div class="user_forms-forgot">
+                <h2 class="forms_title">Forgot Password</h2>
+                <form class="forms_form">
+                    <fieldset class="forms_fieldset">
+                        <div class="forms_field">
+                            <input type="email" placeholder="Email" class="forms_field-input" required autofocus />
+                        </div>
+                    </fieldset>
+                    <div class="forms_buttons">
+                        <button type="submit" class="forms_buttons-action">Send reset link</button>
+                        @* <input type="submit" value="Sign Up" class="btn btn-primary" /> *@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

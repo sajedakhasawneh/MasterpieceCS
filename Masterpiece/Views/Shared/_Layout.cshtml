@@ -10,7 +10,14 @@
 	<link rel="stylesheet" href="~/css/contact.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/speicalOrder.css" asp-append-version="true" />
+	@* <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" /> *@
+	<link rel="stylesheet" href="~/css/editProfile.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/payment.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/specialForm.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Masterpiece.styles.css" asp-append-version="true" />
+	
 
 	<!-- Bootstrap 5 CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -26,8 +33,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Abel&family=Jacques+Francois&display=swap" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css2?family=Abel&family=Jacques+Francois&family=League+Script&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="/CSS/home.css">
 </head>
 <body>
     <header>
@@ -38,8 +45,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
-                    <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-                    @* <li class="nav-item"> *@
+                     <div class="hori-selector">
+						<div class="left">
+						</div> 
+					 	<div class="right"> 
+					</div> 
+					</div> 
+                    @* <li class="nav-item">
                     @*     <a class="nav-link" href="home.html" href="javascript:void(0);">Home</a> *@
                     @* </li> *@
                     @* <li class="nav-item active"> *@
@@ -52,16 +64,16 @@
 						<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" asp-controller="services" asp-action="Index">Services</a>
+						<a class="nav-link" asp-controller="services" asp-action="category">Services</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" asp-controller="specialOrder" asp-action="Index">Special Order</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" asp-controller="aboutController1" asp-action="Index">About Us</a>
+						<a class="nav-link" asp-controller="Home" asp-action="about">About Us</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" asp-controller="contact" asp-action="Index">contact us</a>
+						<a class="nav-link" asp-controller="Home" asp-action="contact">contact us</a>
 					</li>
                     @* <li class="nav-item"> *@
                     @*     <a class="nav-link" href="aboutUs.html" href="javascript:void(0);">About us</a> *@
@@ -69,17 +81,17 @@
                     @* <li class="nav-item"> *@
                     @*     <a class="nav-link" href="contact.html" href="javascript:void(0);">Contact us</a> *@
                     @* </li> *@
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link" href="profile.html" href="javascript:void(0);"><i class="fa fa-user" aria-hidden="true"></i></a> *@
-                    @* </li> *@
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link" href="checkout.html" href="javascript:void(0);"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a> *@
-                    @* </li> *@
+                    <li class="nav-item">
+						<a class="nav-link" asp-controller="User" asp-action="Profile"><i class="fa fa-user" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+						<a class="nav-link" asp-controller="payment" asp-action="payment"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
+	<div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -166,8 +178,9 @@
    <!-- slider -->
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-   <script src="/JS/home.js"></script>
-
+   <script src="/js/site.js"></script>
+   <script src="/js/services.js"></script>
+	<script src="/js/register.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

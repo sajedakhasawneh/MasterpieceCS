@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Masterpiece.Models.Category>
+
+@{
+    ViewData["Title"] = "viewCategory";
+    // Layout = "/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1>viewCategory</h1>
+
+<p>
+    <a asp-action="addCategory">Create New</a>
+</p>
+
+<main class="p-3">
+    <div class="row">
+        <div class="col-md-12">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.Description) *@
+            @* </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.Description) *@
+                @* </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageUrl)
+                </td>
+                <td>
+
+                    <a class="btn btn-warning btn-sm" asp-action="editCategory" asp-route-id="@item.Id"><i class="fa fa-edit"></i> Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="deleteCategory" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+</main>

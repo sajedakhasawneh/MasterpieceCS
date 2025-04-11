@@ -1,0 +1,102 @@
+﻿@model Masterpiece.Models.SpecialOrder
+
+<section>
+    <div class="container" style="padding-top: 50px; padding-left: 150px;">
+        <div class="row g-0">
+            <!-- Big Square -->
+            <div class="col-12 col-md-6 col-lg-4 position-relative">
+                <img src="/img/formgallery7.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+            </div>
+
+            <!-- Blank Big Square with 3 Inner Squares -->
+            <div class="col-12 col-md-6 col-lg-4 d-flex flex-wrap position-relative">
+                <div class="col-6 p-0 position-relative">
+                    <img src="/img/formgallery1.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+                </div>
+                <div class="col-6 p-0 position-relative">
+                    <img src="/img/formgallery2.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+                </div>
+                <!-- <div class="col-6 p-0 position-relative">
+                  <img src="/img/formgallery3.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+                </div>
+                <div class="col-6 p-0 position-relative" >
+                  <img src="/img/formgallery3.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+                </div> -->
+            </div>
+
+            <!-- Vertical Rectangle -->
+            <div class="col-12 col-md-6 col-lg-2 position-relative">
+                <img src="/img/formgallery6.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="flexsection">
+    <section class="designForm">
+       @*  <form asp-controller="specialOrder" asp-action="SpecialForm">
+            <input type="hidden" asp-for="UserId" value="@ViewBag.userId" />
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number">
+
+            <label for="product">Type of Product</label>
+            <select id="product">
+                <option>Candles</option>
+                <option>Embroidery</option>
+                <option>Crochet</option>
+                <option>Re-zen</option>
+            </select>
+
+            <label for="occasion">Occasion</label>
+            <select id="occasion">
+                <option>Wedding</option>
+                <option>Birthday</option>
+                <option>Graduation</option>
+                <option>Corporate Gift</option>
+            </select>
+
+            <label for="date">Delivery Date</label>
+            <input type="date" id="date">
+
+            <label>Description</label>
+            <textarea rows="4" placeholder="Provide additional details..."></textarea>
+
+            <label for="img">Upload an Inspiration Image</label>
+            <input type="file" id="img">
+
+            <label>Budget Range</label>
+            <div class="budget-container">
+                <input type="number" id="minbd" placeholder="Min">
+                <input type="number" id="maxbd" placeholder="Max">
+            </div>
+
+            <input type="submit" value="Submit" class="btnsubmit">
+        </form> *@
+
+        <form asp-action="specialForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <div class="form-group"> *@
+            @*     <input type="hidden" asp-for="UserId" value="@ViewBag.userId" /> *@
+            @* </div> *@
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" />
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </section>
+</section>
+

@@ -1,0 +1,57 @@
+﻿@model Masterpiece.Models.User
+<div class="container">
+    <div>
+        <h1>Profile</h1>
+        <hr>
+    </div>
+    <div class="row" style="padding-top: 25px ;">
+        <!-- Left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="https://png.pngitem.com/pimgs/s/150-1503945_transparent-user-png-default-user-image-png-png.png" class="img-thumbnail rounded-circle" alt="avatar">
+            </div>
+        </div>
+        <!-- Edit form column -->
+        <div class="col-md-9">
+            <h3>Personal Info</h3>
+            <form asp-action="Profile">
+                <div class="row mb-3">
+                    <label for="username" class="col-md-3 col-form-label">Username:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="username" class="form-control" value="@Model.Name">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="email" class="col-md-3 col-form-label">Email:</label>
+                    <div class="col-md-9">
+                        <input type="email" id="email" class="form-control" value="@Model.Email">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="phone" class="col-md-3 col-form-label">Phone Number:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="phone" class="form-control" value="@Model.Phone">
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <label for="city" class="col-md-3 col-form-label">City:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="city" class="form-control" value="@Model.City">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <button type="button" class="btn-edit"asp-controller="User" asp-action="editProfile">Update Information</button>
+                        <button type="button" class="btn-edit"><a asp-controller="User" asp-action="resetPassword">Resst Password</a></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
