@@ -1,0 +1,31 @@
+﻿* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.product-image {
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.rating i {
+    color: #ffc107;
+}
+
+.badge-custom {
+    font-size: 0.8rem;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+    .thumbnail:hover, .thumbnail.active {
+        border-color: #0d6efd;
+    }
+
+

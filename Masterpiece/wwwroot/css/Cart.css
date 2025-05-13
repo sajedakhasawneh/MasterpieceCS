@@ -1,0 +1,41 @@
+﻿* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.quantity-selector .input-group {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.quantity-selector .form-control {
+    border-left: 0;
+    border-right: 0;
+}
+
+.quantity-selector .minus-btn,
+.quantity-selector .plus-btn {
+    width: 40px;
+}
+
+.list-group-item {
+    border-color: rgba(0,0,0,.05);
+}
+
+.sticky-top {
+    z-index: 1;
+}
+
+.table thead th {
+    border-bottom: none;
+    border-top: none;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.card {
+    border-radius: 0.5rem;
+}

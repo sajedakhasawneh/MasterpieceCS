@@ -1,57 +1,307 @@
 ﻿@model Masterpiece.Models.User
-<div class="container">
-    <div>
-        <h1>Profile</h1>
-        <hr>
-    </div>
-    <div class="row" style="padding-top: 25px ;">
-        <!-- Left column -->
-        <div class="col-md-3">
-            <div class="text-center">
-                <img src="https://png.pngitem.com/pimgs/s/150-1503945_transparent-user-png-default-user-image-png-png.png" class="img-thumbnail rounded-circle" alt="avatar">
-            </div>
-        </div>
-        <!-- Edit form column -->
+
+@{
+    Layout = "/Views/Shared/Profile.cshtml";
+}
+
+@* <div class="container"> *@
+@*     <div> *@
+@*         <h1>Profile</h1> *@
+@*         <hr> *@
+@*     </div> *@
+@*     <div class="row"> *@
+@*         <!-- Left column --> *@
+@*         <div class="col-md-3"> *@
+@*             <div class="text-center"> *@
+@*                 <img src="https://png.pngitem.com/pimgs/s/150-1503945_transparent-user-png-default-user-image-png-png.png" class="img-thumbnail rounded-circle" alt="avatar"> *@
+@*             </div> *@
+@*         </div> *@
+@*         <!-- Edit form column --> *@
+@*         <div class="col-md-9"> *@
+@*             <h3>Personal Info</h3> *@
+@*             <form asp-action="Profile"> *@
+@*                 <div class="row mb-3"> *@
+@*                     <label for="username" class="col-md-3 col-form-label">Username:</label> *@
+@*                     <div class="col-md-9"> *@
+@*                         <input type="text" id="username" class="form-control" value="@Model.Name"> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <div class="row mb-3"> *@
+@*                     <label for="email" class="col-md-3 col-form-label">Email:</label> *@
+@*                     <div class="col-md-9"> *@
+@*                         <input type="email" id="email" class="form-control" value="@Model.Email"> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <div class="row mb-3"> *@
+@*                     <label for="phone" class="col-md-3 col-form-label">Phone Number:</label> *@
+@*                     <div class="col-md-9"> *@
+@*                         <input type="text" id="phone" class="form-control" value="@Model.Phone"> *@
+@*                     </div> *@
+@*                 </div> *@
+
+
+@*                 <div class="row mb-3"> *@
+@*                     <label for="city" class="col-md-3 col-form-label">City:</label> *@
+@*                     <div class="col-md-9"> *@
+@*                         <input type="text" id="city" class="form-control" value="@Model.City"> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <div class="row mb-3"> *@
+@*                     <div class="col-md-3"></div> *@
+@*                     <div class="col-md-9"> *@
+@*                         @* <button type="button" class="btn-edit"asp-controller="User" asp-action="editProfile">Update Information</button> *@ 
+@*                         @* <button type="button" class="btn-edit" asp-controller="User" asp-action="resetPassword"> Resst Password</button> *@ 
+@*                         <button type="button" class="btn-edit"><a asp-controller="User" asp-action="editProfile">Update Information</a></button> *@
+@*                         <button type="button" class="btn-edit"><a  asp-controller="User" asp-action="resetPassword">Resst Password</a></button> *@
+@*                         <button type="button" class="btn-edit"><a asp-controller="User" asp-action="orderHistory">History</a></button> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </form> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+
+
+<!-- Main Content -->
+
         <div class="col-md-9">
-            <h3>Personal Info</h3>
-            <form asp-action="Profile">
-                <div class="row mb-3">
-                    <label for="username" class="col-md-3 col-form-label">Username:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="username" class="form-control" value="@Model.Name">
+            <!-- Profile Header -->
+            <div class="card profile-card mb-4">
+                <div class="card-body text-center py-4">
+                    <div class="position-relative d-inline-block">
+                        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img mb-3">
+                        <span class="edit-icon" data-bs-toggle="tooltip" title="Change Photo">
+                            <i class="fas fa-camera"></i>
+                        </span>
+                    </div>
+                    <h3>@Model.Name</h3>
+                    <p class="text-muted">Member since January 2022</p>
+                    @* <button class="btn btn-outline-primary"> *@
+                    @*     <i class="fas fa-edit"></i> Edit Profile *@
+                    @* </button> *@
+                     <button type="button" class="btn-outline-primary">
+                        <a asp-controller="User" asp-action="editProfile">Update Information</a>
+                       <i class="fas fa-edit"></i>
+                     </button>
+                </div>
+            </div>
+
+            <!-- Profile Content Tabs -->
+            <ul class="nav nav-pills mb-4" id="profileTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="personal-tab" data-bs-toggle="pill" data-bs-target="#personal" type="button">
+                        Personal Information
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="security-tab" data-bs-toggle="pill" data-bs-target="#security" type="button">
+                        Security
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation"> 
+                    <button class="nav-link" id="notifications-tab" data-bs-toggle="pill" data-bs-target="#notifications" type="button">
+                        Notifications
+                    </button>
+                 </li>
+            </ul>
+
+            <div class="tab-content" id="profileTabsContent">
+                <!-- Personal Information Tab -->
+                <div class="tab-pane fade show active" id="personal" role="tabpanel">
+                    <div class="card profile-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">Personal Information</h5>
+                                <span class="edit-icon">
+                                    <a asp-controller="User" asp-action="editProfile">
+                                      <i class="fas fa-edit"></i> Edit
+                                    </a>  
+                                </span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted"> Name</label>
+                                        <p class="form-control-plaintext">@Model.Name</p>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Email</label>
+                                <p class="form-control-plaintext">@Model.Email</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">City</label>
+                                        <p class="form-control-plaintext">@Model.City</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted">Phone</label>
+                                        <p class="form-control-plaintext">@Model.Phone</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* <div class="mb-3"> *@
+                            @*     <label class="form-label text-muted">Date of Birth</label> *@
+                            @*     <p class="form-control-plaintext">January 15, 1990</p> *@
+                            @* </div> *@
+
+                            @* <div class="mb-3"> *@
+                            @*     <label class="form-label text-muted">Gender</label> *@
+                            @*     <p class="form-control-plaintext">Male</p> *@
+                            @* </div> *@
+
+                            <hr>
+
+                            @* <h6 class="mb-3">Communication Preferences</h6> *@
+                            @* <div class="form-check form-switch mb-2"> *@
+                            @*     <input class="form-check-input" type="checkbox" id="emailPromotions" checked> *@
+                            @*     <label class="form-check-label" for="emailPromotions">Email Promotions</label> *@
+                            @* </div> *@
+                            @* <div class="form-check form-switch mb-2"> *@
+                            @*     <input class="form-check-input" type="checkbox" id="smsNotifications"> *@
+                            @*     <label class="form-check-label" for="smsNotifications">SMS Notifications</label> *@
+                            @* </div> *@
+                            @* <div class="form-check form-switch"> *@
+                            @*     <input class="form-check-input" type="checkbox" id="newsletter" checked> *@
+                            @*     <label class="form-check-label" for="newsletter">Newsletter Subscription</label> *@
+                            @* </div> *@
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="email" class="col-md-3 col-form-label">Email:</label>
-                    <div class="col-md-9">
-                        <input type="email" id="email" class="form-control" value="@Model.Email">
-                    </div>
-                </div>
+                <!-- Security Tab -->
+                <div class="tab-pane fade" id="security" role="tabpanel">
+                    <div class="card profile-card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Security Settings</h5>
 
-                <div class="row mb-3">
-                    <label for="phone" class="col-md-3 col-form-label">Phone Number:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="phone" class="form-control" value="@Model.Phone">
-                    </div>
-                </div>
+                            <div class="mb-4">
+                                <h6>Password</h6>
+                                <p class="text-muted">Last changed 3 months ago</p>
+                                <button class="btn btn-outline-primary">
+                                    Change Password
+                                </button>
+                            </div>
 
+                            @* <div class="mb-4"> *@
+                            @*     <h6>Two-Factor Authentication</h6> *@
+                            @*     <p class="text-muted">Add an extra layer of security to your account</p> *@
+                            @*     <div class="form-check form-switch mb-2"> *@
+                            @*         <input class="form-check-input" type="checkbox" id="twoFactorAuth"> *@
+                            @*         <label class="form-check-label" for="twoFactorAuth">Enable Two-Factor Authentication</label> *@
+                            @*     </div> *@
+                            @* </div> *@
 
-                <div class="row mb-3">
-                    <label for="city" class="col-md-3 col-form-label">City:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="city" class="form-control" value="@Model.City">
-                    </div>
-                </div>
+                @*             <div class="mb-4"> *@
+                @*                 <h6>Active Sessions</h6> *@
+                @*                 <div class="table-responsive"> *@
+                @*                     <table class="table"> *@
+                @*                         <thead> *@
+                @*                             <tr> *@
+                @*                                 <th>Device</th> *@
+                @*                                 <th>Location</th> *@
+                @*                                 <th>Last Active</th> *@
+                @*                                 <th>Action</th> *@
+                @*                             </tr> *@
+                @*                         </thead> *@
+                @*                         <tbody> *@
+                @*                             <tr> *@
+                @*                                 <td> *@
+                @*                                     <i class="fas fa-laptop me-2"></i> Windows Chrome *@
+                @*                                 </td> *@
+                @*                                 <td>New York, USA</td> *@
+                @*                                 <td>Today, 10:30 AM</td> *@
+                @*                                 <td> *@
+                @*                                     <button class="btn btn-sm btn-outline-danger">Logout</button> *@
+                @*                                 </td> *@
+                @*                             </tr> *@
+                @*                             <tr> *@
+                @*                                 <td> *@
+                @*                                     <i class="fas fa-mobile-alt me-2"></i> iPhone Safari *@
+                @*                                 </td> *@
+                @*                                 <td>Chicago, USA</td> *@
+                @*                                 <td>Yesterday, 5:45 PM</td> *@
+                @*                                 <td> *@
+                @*                                     <button class="btn btn-sm btn-outline-danger">Logout</button> *@
+                @*                                 </td> *@
+                @*                             </tr> *@
+                @*                         </tbody> *@
+                @*                     </table> *@
+                @*                 </div> *@
+                @*             </div> *@
+                        </div>
+                    </div> 
+                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9">
-                        <button type="button" class="btn-edit"asp-controller="User" asp-action="editProfile">Update Information</button>
-                        <button type="button" class="btn-edit"><a asp-controller="User" asp-action="resetPassword">Resst Password</a></button>
+                @* <!-- Notifications Tab --> *@
+                @* <div class="tab-pane fade" id="notifications" role="tabpanel"> *@
+                @*     <div class="card profile-card"> *@
+                @*         <div class="card-body"> *@
+                @*             <h5 class="card-title mb-4">Notification Preferences</h5> *@
+
+                @*             <div class="mb-4"> *@
+                @*                 <h6>Email Notifications</h6> *@
+                @*                 <div class="form-check form-switch mb-2"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="orderEmails" checked> *@
+                @*                     <label class="form-check-label" for="orderEmails">Order Updates</label> *@
+                @*                 </div> *@
+                @*                 <div class="form-check form-switch mb-2"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="promoEmails" checked> *@
+                @*                     <label class="form-check-label" for="promoEmails">Promotions & Offers</label> *@
+                @*                 </div> *@
+                @*                 <div class="form-check form-switch mb-2"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="stockEmails"> *@
+                @*                     <label class="form-check-label" for="stockEmails">Back in Stock Alerts</label> *@
+                @*                 </div> *@
+                @*                 <div class="form-check form-switch"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="newsletterEmails" checked> *@
+                @*                     <label class="form-check-label" for="newsletterEmails">Newsletters</label> *@
+                @*                 </div> *@
+                @*             </div> *@
+
+                @*             <div class="mb-4"> *@
+                @*                 <h6>Push Notifications</h6> *@
+                @*                 <div class="form-check form-switch mb-2"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="orderPush" checked> *@
+                @*                     <label class="form-check-label" for="orderPush">Order Updates</label> *@
+                @*                 </div> *@
+                @*                 <div class="form-check form-switch mb-2"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="promoPush"> *@
+                @*                     <label class="form-check-label" for="promoPush">Promotions & Offers</label> *@
+                @*                 </div> *@
+                @*                 <div class="form-check form-switch"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="abandonedCartPush" checked> *@
+                @*                     <label class="form-check-label" for="abandonedCartPush">Abandoned Cart Reminders</label> *@
+                @*                 </div> *@
+                @*             </div> *@
+
+                @*             <div class="mb-4"> *@
+                @*                 <h6>SMS Notifications</h6> *@
+                @*                 <div class="form-check form-switch mb-2"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="orderSMS"> *@
+                @*                     <label class="form-check-label" for="orderSMS">Order Updates</label> *@
+                @*                 </div> *@
+                @*                 <div class="form-check form-switch"> *@
+                @*                     <input class="form-check-input" type="checkbox" id="promoSMS"> *@
+                @*                     <label class="form-check-label" for="promoSMS">Promotions & Offers</label> *@
+                @*                 </div> *@
+                @*             </div> *@
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@* @* </div> *@ *
+@* </div> *@

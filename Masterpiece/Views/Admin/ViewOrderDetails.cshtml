@@ -1,0 +1,48 @@
+﻿@model Masterpiece.ViewModel.UserOrderViewModel
+
+@{
+    Layout = "/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+
+<h2>Order Details - Order #@Model.OrderId</h2>
+
+<p>Placed on: @Model.CreatedAt?.ToString("yyyy-MM-dd")</p>
+<p>Status: @Model.Status</p>
+<p>Total Price: @Model.TotalPrice.ToString("C")</p>
+
+<h3>Items</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td><img src="@item.ImageUrl" alt="Product Image" width="50" /></td>
+                <td>@item.ProductName</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>@item.Quantity</td>
+                <td>@(item.UnitPrice * item.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>

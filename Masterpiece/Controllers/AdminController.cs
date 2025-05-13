@@ -1,5 +1,8 @@
 ﻿using Masterpiece.Models;
+using Masterpiece.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
@@ -71,7 +74,8 @@ namespace Masterpiece.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Category));
         }
-        public IActionResult deleteCategory(int id) {
+        public IActionResult deleteCategory(int id)
+        {
             var category = _context.Categories.Find(id);
             if (category == null)
             {
@@ -90,17 +94,42 @@ namespace Masterpiece.Controllers
             return View(product);
         }
 
-        public IActionResult addProduct() { 
+        public IActionResult addProduct()
+        {
+            var categories = _context.Categories.ToList();
+            var users = _context.Users.ToList();
+
+            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "Name");
+            ViewBag.OwnerId = new SelectList(users, "UserId", "Name");
+
             return View();
         }
+
         [HttpPost]
         public IActionResult addProduct(Product product)
         {
-            var newProduct = _context.Products.Add(product);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(viewProduct));
+            if (!ModelState.IsValid)
+            {
+                var categories = _context.Categories.ToList();
 
+                // ✅ Only include users with "Owner" role
+                var owners = _context.Users
+                    .Where(u => u.Role == "Owner")
+                    .ToList();
+
+                ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+                ViewBag.OwnerId = new SelectList(owners, "Id", "Name"); // adjust property names to match your User model
+
+                return View(product);
+            }
+
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(viewProduct));
         }
+
+
 
         public IActionResult editProduct(int id)
         {
@@ -130,7 +159,8 @@ namespace Masterpiece.Controllers
             return RedirectToAction("viewProduct"); // or wherever you want to go after saving
         }
 
-        public IActionResult deleteProduct(int id) {
+        public IActionResult deleteProduct(int id)
+        {
             var product = _context.Categories.Find(id);
             if (product == null)
             {
@@ -141,10 +171,144 @@ namespace Masterpiece.Controllers
             return RedirectToAction("viewProduct");
         }
 
+        /////////Users////////////////////////////
+        ///
+
+        public IActionResult viewUsers()
+        {
+            var user = _context.Users.ToList();
+            return View(user);
+        }
+
+
+        ///////////////////Order
+        ///
+        //public IActionResult viewOrders()
+        //{
+        //    var order = _context.Orders.ToList();
+        //    return View(order);
+        //}
+
+        public IActionResult viewOrders()
+        {
+            var orders = _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Select(o => new UserOrderViewModel
+                {
+                    OrderId = o.OrderId,
+                    CreatedAt = o.CreatedAt,
+                    TotalPrice = o.TotalPrice,
+                    Status = o.Status,
+                    User = o.User,
+                    Items = o.OrderItems.Select(oi => new orderHistoryVM
+                    {
+                        ProductName = oi.Product.Name,
+                        ImageUrl = oi.Product.ImageUrl,
+                        UnitPrice = oi.Product.Price,
+                        Quantity = oi.Quantity
+                    }).ToList()
+                })
+                .ToList();
+
+            return View(orders);
+        }
+
+
+        public IActionResult ViewOrderDetails(int id)
+        {
+            var order = _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Where(o => o.OrderId == id)
+                .Select(o => new UserOrderViewModel
+                {
+                    OrderId = o.OrderId,
+                    CreatedAt = o.CreatedAt,
+                    TotalPrice = o.TotalPrice,
+                    Status = o.Status,
+                    User = o.User,
+                    Items = o.OrderItems.Select(oi => new orderHistoryVM
+                    {
+                        ProductName = oi.Product.Name,
+                        ImageUrl = oi.Product.ImageUrl,
+                        UnitPrice = oi.Product.Price,
+                        Quantity = oi.Quantity
+                    }).ToList()
+                })
+                .FirstOrDefault();
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+
+
+
+        public IActionResult editOrder(int id)
+        {
+            var order = _context.Orders.Find(id);
+            if (order == null)
+                return NotFound();
+
+            var viewModel = new EditOrderStatusViewModel
+            {
+                OrderId = order.OrderId,
+                Status = order.Status
+            };
+
+            return View(viewModel);
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult editOrder(EditOrderStatusViewModel model)
+        {
+            var existingOrder = _context.Orders.FirstOrDefault(c => c.OrderId == model.OrderId);
+            if (existingOrder == null)
+            {
+                return NotFound();
+            }
+
+            existingOrder.Status = model.Status;
+            _context.SaveChanges();
+
+            return RedirectToAction("viewOrders");
+        }
+
+
+
+        public IActionResult ContactMessages()
+        {
+            var messages = _context.ContactUs
+                .Include(c => c.User)
+                .Select(c => new ContactMessageViewModel
+                {
+                    Id = c.Id,
+                    Subject = c.Subject,
+                    Message = c.Message,
+                    Status = c.Status,
+                    CreatedAt = c.CreatedAt,
+                    UserName = c.User != null ? c.User.Name : "Anonymous"
+                })
+                .ToList();
+
+            return View(messages);
+        }
+
+
+
+
+
+
+
     }
-
-
-    /////////Users////////////////////////////
-    ///
 
 }

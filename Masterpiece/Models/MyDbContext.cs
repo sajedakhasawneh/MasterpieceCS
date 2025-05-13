@@ -17,6 +17,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Cart> Carts { get; set; }
 
+    public virtual DbSet<CartItem> CartItems { get; set; }
+
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<ContactU> ContactUs { get; set; }
@@ -49,30 +51,37 @@ public partial class MyDbContext : DbContext
     {
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cart__3214EC27E16AF4EC");
+            entity.HasKey(e => e.Id).HasName("PK__Cart__3214EC27A25E6DCE");
 
             entity.ToTable("Cart");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.AddedAt)
-                .IsRowVersion()
-                .IsConcurrencyToken()
-                .HasColumnName("added_at");
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
-            entity.Property(e => e.Quantity)
-                .HasDefaultValue(1)
-                .HasColumnName("quantity");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.Carts)
-                .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart__product_id__6477ECF3");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
 
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart__user_id__6383C8BA");
+                .HasConstraintName("FK__Cart__UserId__1BC821DD");
+        });
+
+        modelBuilder.Entity<CartItem>(entity =>
+        {
+            entity.HasKey(e => e.CartItemId).HasName("PK__CartItem__488B0B0AFE65DA40");
+
+            entity.Property(e => e.Quantity).HasDefaultValue(1);
+            entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
+
+            entity.HasOne(d => d.Cart).WithMany(p => p.CartItems)
+                .HasForeignKey(d => d.CartId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__CartItems__CartI__236943A5");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.CartItems)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__CartItems__Produ__245D67DE");
         });
 
         modelBuilder.Entity<Category>(entity =>
@@ -122,6 +131,7 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.ContactUs)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__contact_u__user___6FE99F9F");
         });
 
@@ -133,7 +143,6 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.Status)
                 .HasMaxLength(20)
                 .IsUnicode(false)
@@ -144,11 +153,6 @@ public partial class MyDbContext : DbContext
                 .HasColumnName("total_price");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.Product).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__product___4AB81AF0");
-
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -157,25 +161,22 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__order_it__3213E83FC0FCD07B");
+            entity.HasKey(e => e.Id).HasName("PK__orderIte__3214EC27B670C6EF");
 
-            entity.ToTable("order_items");
+            entity.ToTable("orderItem");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.Price)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("price");
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__order_ite__order__787EE5A0");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__orderItem__Order__1EA48E88");
 
             entity.HasOne(d => d.Product).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK__order_ite__produ__797309D9");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__orderItem__Produ__1F98B2C1");
         });
 
         modelBuilder.Entity<Payment>(entity =>
@@ -220,13 +221,27 @@ public partial class MyDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
-            entity.Property(e => e.Description)
-                .HasColumnType("text")
-                .HasColumnName("description");
+            entity.Property(e => e.Color)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("color");
+            entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.ImageUrl)
                 .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("image_url");
+            entity.Property(e => e.Img1)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("img1");
+            entity.Property(e => e.Img2)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("img2");
+            entity.Property(e => e.Img3)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("img3");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .IsUnicode(false)
@@ -235,6 +250,11 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
+            entity.Property(e => e.Rating).HasColumnName("rating");
+            entity.Property(e => e.Size)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("size");
             entity.Property(e => e.Stock).HasColumnName("stock");
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
@@ -321,16 +341,30 @@ public partial class MyDbContext : DbContext
             entity.ToTable("special_Order");
 
             entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.Budget).HasColumnName("budget");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
+            entity.Property(e => e.Delivery).HasColumnName("delivery");
             entity.Property(e => e.Details)
                 .HasColumnType("text")
                 .HasColumnName("details");
+            entity.Property(e => e.Img)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("img");
+            entity.Property(e => e.Occuaion)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("occuaion");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
+            entity.Property(e => e.ProductType)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("productType");
             entity.Property(e => e.Status)
                 .HasMaxLength(20)
                 .IsUnicode(false)

@@ -21,13 +21,23 @@ public partial class Product
 
     public string? ImageUrl { get; set; }
 
-    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
+    public int? Rating { get; set; }
+
+    public string? Color { get; set; }
+
+    public string? Size { get; set; }
+
+    public string? Img1 { get; set; }
+
+    public string? Img2 { get; set; }
+
+    public string? Img3 { get; set; }
+
+    public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual User Owner { get; set; } = null!;
 

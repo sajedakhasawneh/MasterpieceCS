@@ -1,4 +1,4 @@
-﻿* {
+﻿/** {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -7,27 +7,28 @@
 body {
     background-color: #F6F4F0 !important;
     color: #3E433B !important;
-}
+}*/
 
 
 /* Apply Jacques-François font to all headers (h1, h2, h3, h4, h5, h6) */
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
     font-family: "Jacques Francois", serif !important;
-}
+}*/
 
 /* Apply Abel font to all paragraph text */
-p {
+/*p {
     font-family: 'Abel', sans-serif;
 }
 ***************/
+*/
 /**********************Map**************************/
-.map {
+/*.map {
     padding-left: 160px;
     padding-bottom: 10px;
-    width: 1300px;
-    /* width:1165px;
+    width: 1300px;*/
+/* width:1165px;
     height:250px; */
-}
+/*}
 
 
 
@@ -39,14 +40,9 @@ p {
 iframe {
     width: 100%;
     height: 220px;
-}
-
-
-
-
-
+}*/
 /***********************Form************************/
-.section3formNews {
+/*.section3formNews {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -96,16 +92,16 @@ textarea {
     background-color: #D9E0D7;
 }
 
-.btn {
-    /* color: white; */
-    border: 2px solid #D9E0D7;
+.btn {*/
+/* color: white; */
+/*border: 2px solid #D9E0D7;
     border-radius: 25px;
     height: 2.75rem;
     width: 43rem;
     background-color: #D9E0D7;
-    background: linear-gradient(to right, #5F6759, #D9E0D7);
-    /* transition: all 0.4s ease-in-out; */
-}
+    background: linear-gradient(to right, #5F6759, #D9E0D7);*/
+/* transition: all 0.4s ease-in-out; */
+/*}
 
 .newsLetterHead {
     text-align: center;
@@ -136,15 +132,15 @@ textarea {
     padding-left: 2px;
 }
 
-#btnNews {
-    /* padding-bottom: 5px; */
-    border-width: 2px;
-    border-style: solid;
-    /* background-color: #5F6759; */
-    background: linear-gradient(to right, #5F6759, #D9E0D7);
-}
+#btnNews {*/
+/* padding-bottom: 5px; */
+/*border-width: 2px;
+    border-style: solid;*/
+/* background-color: #5F6759; */
+/*background: linear-gradient(to right, #5F6759, #D9E0D7);
+}*/
 /***********fixed Data CArds*********/
-.fixeddata {
+/*.fixeddata {
     padding-top: 8rem;
     padding-left: 10rem;
     display: flex;
@@ -170,16 +166,12 @@ textarea {
     box-shadow: 0 5px 25px rgba(1, 1, 1, 35%);
     border-radius: 10px;
     transition: width 2s, height 1s;
-}
-
-
-
+}*/
 /***********************************************************************************************************************/
-
-.section-services {
-    font-family: "Poppins", sans-serif;
-    /* background-color: #e6edf7; */
-    color: #202020;
+/*.section-services {
+    font-family: "Poppins", sans-serif;*/
+/* background-color: #e6edf7; */
+/*color: #202020;
     padding-top: 25px;
     padding-bottom: 50px;
     padding-left: 150px;
@@ -301,9 +293,9 @@ textarea {
             transition: color .3s;
         }
 
-        .section-services .single-service:hover .description {
-            /* color: #fff; */
-            color: #F6F4F0;
+        .section-services .single-service:hover .description {*/
+/* color: #fff; */
+/*color: #F6F4F0;
         }
 
         .section-services .single-service a {
@@ -341,9 +333,32 @@ textarea {
 .mediaicons {
     font-size: 35px;
 }
-.hero {
-    /* background: #f9f9f9; */
-    padding-top: 40px;
+.hero {*/
+/* background: #f9f9f9; */
+/*padding-top: 40px;
     border-radius: 10px;
     text-align: center;
+}*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-info-card {
+    transition: transform 0.3s;
+}
+
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+    }
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.map-container {
+    overflow: hidden;
+    border-radius: 8px;
 }

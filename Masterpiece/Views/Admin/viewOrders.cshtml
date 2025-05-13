@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Masterpiece.ViewModel.UserOrderViewModel>
+@{
+    ViewData["Title"] = "viewOrders";
+    Layout = "/Views/Shared/Admin_Layout.cshtml";
+}
+
+
+
+<div class="main-content">
+    <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
+                        <a href="#" class="btn btn-sm btn-primary">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @* <td>#ORD-1234</td> *@
+                                            <td>@item.OrderId</td>
+                                            <td>@item.User.Name</td>
+                                            <td><span class="badge bg-success">@item.Status</span></td>
+                                            <td>@item.TotalPrice JOD</td>
+                                            <td>@item.CreatedAt</td>
+                                            <td>
+                                                <a href="@Url.Action("ViewOrderDetails", "Admin", new { id = item.OrderId })">View</a> |
+                                                <a href="@Url.Action("editOrder", "Admin", new { id = item.OrderId })">Edit</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

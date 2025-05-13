@@ -1,0 +1,44 @@
+﻿@model List<Masterpiece.ViewModel.ContactMessageViewModel>
+@* @model IEnumerable<Masterpiece.ViewModel.ContactMessageViewModel> *@
+
+@{
+    Layout = "/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+<h2>Contact Messages</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var msg in Model)
+        {
+            <tr>
+                <td>@msg.UserName</td>
+                <td>@msg.Subject</td>
+                <td>@msg.Message</td>
+                <td>@msg.Status</td>
+                <td>@msg.CreatedAt?.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>

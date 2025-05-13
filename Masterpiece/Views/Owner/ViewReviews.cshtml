@@ -1,0 +1,32 @@
+﻿@model List<Masterpiece.Models.Review>
+
+
+    @{
+    Layout = "/Views/Shared/Admin_Layout.cshtml";
+    }
+
+<h2>My Product Reviews</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var review in Model)
+        {
+            <tr>
+                <td>@review.Product.Name</td>
+                <td>@review.User.Name</td>
+                <td>@review.Rating</td>
+                <td>@review.Comment</td>
+                <td>@review.CreatedAt?.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

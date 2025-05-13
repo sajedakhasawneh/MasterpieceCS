@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Masterpiece.Models.User>
+@{
+    ViewData["Title"] = "viewUsers";
+    Layout = "/Views/Shared/Admin_Layout.cshtml";
+}
+}
+
+<div class="main-content">
+    <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
+                        <a href="#" class="btn btn-sm btn-primary">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        @* <th>Amount</th> *@
+                                        @* <th>Date</th> *@
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @* <td>#ORD-1234</td> *@
+                                            <td>@item.Name</td>
+                                            @* <td><span class="badge bg-success">Completed</span></td> *@
+                                            <td>@item.Email</td>
+                                            <td>@item.Role</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

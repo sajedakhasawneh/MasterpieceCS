@@ -1,6 +1,10 @@
-﻿using Masterpiece.Models;
+﻿using System.Diagnostics;
+using Masterpiece.Models;
+using Masterpiece.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Masterpiece.Controllers
@@ -28,7 +32,7 @@ namespace Masterpiece.Controllers
             { 
                 _context.Users.Add(user);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(Register));
 
             }
             else
@@ -71,61 +75,13 @@ namespace Masterpiece.Controllers
             }
 
             ModelState.AddModelError("", "Invalid email or password.");
-            return View();
+            return RedirectToAction(nameof(Register));
         }
 
-        //[HttpPost]
-        //public IActionResult Login(string email, string password)
-        //{
-        //    // Attempt to find the user by email and password
-        //    var user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
-
-        //    // Check if user is found
-        //    if (user == null)
-        //    {
-        //        // email not found
-        //        ViewBag.Error = "Email not found.";
-        //        return RedirectToAction("Register"); // this stays on the login view
-        //    }
-        //    else if (user.Password != password)
-        //    {
-        //        // password mismatch
-        //        ViewBag.Error = "Invalid password.";
-        //        return View();
-        //    }
-
-        //    // Login successful
-        //    else
-        //    {
-        //        // Store the user's ID in the session
-        //        HttpContext.Session.SetInt32("UserId", user.Id);
-
-        //        // Redirect based on the user's role
-        //        if (user.Role == "customer")
-        //        {
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //        else if (user.Role == "owner")
-        //        {
-        //            return RedirectToAction("Owner", "Index");
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("", "Admin");
-        //        }
-        //    }
-        //}
-
-
-        //public IActionResult Profile() {
-        //    int? userID = HttpContext.Session.GetInt32("UserID");
-        //    var user = _context.Users.Find(userID);
-        //    return View(user);
-        //}
-
+       
         public IActionResult Profile()
         {
-            int? userID = HttpContext.Session.GetInt32("UserID");
+            int? userID = HttpContext.Session.GetInt32("UserId");
 
             if (userID == null)
             {
@@ -142,7 +98,7 @@ namespace Masterpiece.Controllers
             }
 
             if (user.Role == "customer"){
-                return RedirectToAction("Profile", "Home");
+                return View(user);
             }
 
             if (user.Role == "owner")
@@ -152,69 +108,16 @@ namespace Masterpiece.Controllers
             else { 
                 return RedirectToAction("Index", "Admin");
             }
-            return View(user);
         }
 
-        //public IActionResult Profile()
-        //{
-        //    if (HttpContext.Session.GetInt32("UserId") == null)
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-
-        //    var userId = HttpContext.Session.GetInt32("UserId").Value;
-        //    var userType = HttpContext.Session.GetString("UserType");
-
-        //    if (userType == "HR")
-        //    {
-        //        var hrUser = _context.Hrs.Find(userId);
-        //        return View(hrUser);
-        //    }
-        //    else if (userType == "Manager")
-        //    {
-        //        var managerUser = _context.Managers
-        //                                  .Include(m => m.Department)
-        //                                  .FirstOrDefault(m => m.Id == userId);
-        //        return View(managerUser);
-        //    }
-        //    else if (userType == "Employee")
-        //    {
-        //        var employeeUser = _context.Employees
-        //                                   .Include(e => e.Department)
-        //                                   .Include(e => e.Manager)
-        //                                   .FirstOrDefault(e => e.Id == userId);
-        //        return View(employeeUser);
-        //    }
-
-        //    return RedirectToAction("Login");
-        //}
-
-        //public IActionResult editProfile()
-        //{
-        //    int? userId = HttpContext.Session.GetInt32("UserId");
-
-        //    if (userId == null)
-        //    {
-        //        // User not logged in
-        //        return RedirectToAction("Login", "User");
-        //    }
-
-        //    var user = _context.Users.Find(userId);
-
-        //    if (user == null)
-        //    {
-        //        return NotFound("User not found");
-        //    }
-
-        //    return View(user);
-        //}
+       
         public IActionResult editProfile()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
             {
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Register", "User");
             }
 
             var user = _context.Users.Find(userId);
@@ -228,75 +131,185 @@ namespace Masterpiece.Controllers
         }
 
 
-        //[HttpPost]
-        //public IActionResult editProfile(User userUpdate)
-        //{
-        //    int? userId = HttpContext.Session.GetInt32("UserId");
-        //    var user = _context.Users.Find(userId);
-
-        //    if (user != null)
-        //    {
-        //        user.Name = userUpdate.Name;
-        //        user.Email = userUpdate.Email;
-        //        user.Password = userUpdate.Password;
-        //        //user.City = userUpdate.ProfileImage;
-        //        user.Phone = userUpdate.Name;
-        //        _context.SaveChanges();
-        //    }
-        //    return RedirectToAction("Profile");
-
-        //}
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult editProfile(User userUpdate)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "User");
-            }
-
             var user = _context.Users.Find(userId);
 
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            if (ModelState.IsValid)
+            if (user != null)
             {
                 user.Name = userUpdate.Name;
                 user.Email = userUpdate.Email;
-
-                // Only update password if not empty
-                if (!string.IsNullOrWhiteSpace(userUpdate.Password))
-                {
-                    user.Password = userUpdate.Password; // 🔐 Hash before saving in real apps!
-                }
-
+                //user.Password = userUpdate.Password;
+                user.City = userUpdate.City;
                 user.Phone = userUpdate.Phone;
-                // If there's a profile image or other fields, update here.
 
-                _context.SaveChanges();
-
-                return RedirectToAction("Profile");
+                _context.SaveChanges(); 
+                return RedirectToAction(nameof(Profile));
             }
-
-            return View(userUpdate);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
-
-
+        
         public IActionResult resetPassword()
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult resetPassword(User user)
+        public IActionResult resetPassword(changePasswordVM password)
         {
-            return View();
+      
+                if (!ModelState.IsValid)
+                {
+                    return View(password);
+                }
+
+                // Step 1: Get the logged-in user's ID
+                int? userId = HttpContext.Session.GetInt32("UserId");
+                if (userId == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                // Step 2: Find the user
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId.Value);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                // Step 3: Check if the current password matches
+                if (user.Password != password.OldPassword)
+                {
+                    ModelState.AddModelError("OldPassword", "The current password is incorrect.");
+                    return View(password);
+                }
+
+                // Step 4: Update the password
+                user.Password = password.NewPassword;
+                _context.SaveChanges();
+
+            TempData["ShowSuccessModal"] = true;
+            return RedirectToAction("Profile");
+        
         }
+
+
+        public IActionResult orderHistory()
+        {
+
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Register", "User");
+
+            var orders = _context.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .OrderByDescending(o => o.CreatedAt)
+                .ToList();
+
+            var viewModel = orders.Select(o => new UserOrderViewModel
+            {
+                OrderId = o.OrderId,
+                CreatedAt = o.CreatedAt,
+                TotalPrice = o.TotalPrice,
+                Status = o.Status,
+                Items = o.OrderItems.Select(oi => new orderHistoryVM
+                {
+                    ProductName = oi.Product.Name,
+                    ImageUrl = oi.Product.ImageUrl,
+                    UnitPrice = oi.UnitPrice,
+                    Quantity = oi.Quantity
+                }).ToList()
+            }).ToList();
+
+            return View(viewModel);
+        }
+
+
+
+
+
+
+
+        public IActionResult addToWishlist()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Register", "User");
+            }
+
+            var wishlistItems = _context.Wishlists
+                .Where(w => w.UserId == userId)
+                .Include(w => w.Product)
+                .ToList();
+
+            // Optional: map to a ViewModel
+            var products = wishlistItems.Select(w => w.Product).ToList();
+            return View(products);
+        }
+
+
+        [HttpPost]
+        public IActionResult addToWishlist(int productId)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Register", "User");
+            }
+
+            // Check if the product is already in wishlist
+            var existing = _context.Wishlists
+                .FirstOrDefault(w => w.UserId == userId && w.ProductId == productId);
+
+            if (existing == null)
+            {
+                var wishlistItem = new Wishlist
+                {
+                    UserId = userId.Value,
+                    ProductId = productId
+                };
+
+                _context.Wishlists.Add(wishlistItem);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("addToWishlist");
+        }
+
+
+
+        [HttpPost]
+        public IActionResult RemoveItem(int id)
+        {
+            var Item = _context.Wishlists.FirstOrDefault(ci => ci.Product.Id == id);
+
+            if (Item != null)
+            {
+                _context.Wishlists.Remove(Item);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("addToWishlist", "User");
+        }
+
+
+        public IActionResult Logout()
+        {
+            // Clear session
+            HttpContext.Session.Clear();
+            return RedirectToAction("Register");
+        }
+
+
     }
 }

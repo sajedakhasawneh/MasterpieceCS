@@ -1,0 +1,161 @@
+﻿@{
+	Layout = "/Views/Shared/Profile.cshtml";
+}
+
+
+<!-- Edit Profile Section -->
+<div class="col-md-9">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Edit Profile</h2>
+        <div>
+            <a href="profile.html" class="btn btn-outline-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </div>
+
+    <!-- Profile Picture Upload -->
+    <div class="card profile-card mb-4">
+        <div class="card-body text-center py-4">
+            <div class="image-upload-wrapper mb-3">
+                <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img" id="profileImage">
+                <input type="file" id="imageUpload" class="image-upload-input" accept="image/*">
+            </div>
+            <p class="text-muted">Click on the image to change your profile photo</p>
+            <button class="btn btn-outline-danger btn-sm" id="removeImage">
+                <i class="far fa-trash-alt"></i> Remove Photo
+            </button>
+        </div>
+    </div>
+
+    <!-- Personal Information Form -->
+    <div class="card profile-card">
+        <div class="card-body">
+            <form id="profileForm">
+                <!-- Basic Information Section -->
+                <div class="form-section">
+                    <h4 class="section-title">Basic Information</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" value="John" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" value="Doe" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" value="john.doe@example.com" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="birthDate" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="birthDate" value="1990-01-15">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                                        <label class="form-check-label" for="male">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                        <label class="form-check-label" for="female">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+                                        <label class="form-check-label" for="other">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Communication Preferences Section -->
+                <div class="form-section">
+                    <h4 class="section-title">Communication Preferences</h4>
+                    <div class="mb-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="emailPromotions" checked>
+                            <label class="form-check-label" for="emailPromotions">Email Promotions</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="smsNotifications">
+                            <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="newsletter" checked>
+                            <label class="form-check-label" for="newsletter">Newsletter Subscription</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Change Section -->
+                <div class="form-section">
+                    <h4 class="section-title">Change Password</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Current Password</label>
+                                <input type="password" class="form-control" id="currentPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">New Password</label>
+                                <input type="password" class="form-control" id="newPassword">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirmPassword">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-danger" id="deleteAccount">
+                        <i class="far fa-trash-alt"></i> Delete Account
+                    </button>
+                    <div>
+                        <a href="profile.html" class="btn btn-outline-secondary me-2">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+   

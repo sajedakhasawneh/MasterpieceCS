@@ -1,0 +1,64 @@
+﻿@model List<Masterpiece.ViewModel.UserOrderViewModel>
+@{
+    Layout = "/Views/Shared/Profile.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>My Orders</h2>
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
+                Filter: All Orders
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">All Orders</a></li>
+                <li><a class="dropdown-item" href="#">Last 30 Days</a></li>
+                <li><a class="dropdown-item" href="#">Past Year</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Delivered</a></li>
+                <li><a class="dropdown-item" href="#">Processing</a></li>
+                <li><a class="dropdown-item" href="#">Cancelled</a></li>
+            </ul>
+        </div>
+    </div>
+
+    @foreach (var order in Model)
+    {
+        <div class="card order-card mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="fw-bold">Order #@order.OrderId</span>
+                    <span class="text-muted ms-3">Placed on @order.CreatedAt?.ToShortDateString()</span>
+                </div>
+                <div>
+                    <span class="order-status">@order.Status</span>
+                    <span class="text-muted ms-3">Total: @order.TotalPrice JOD</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                @foreach (var item in order.Items)
+                {
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <img src="@item.ImageUrl" alt="@item.ProductName" class="product-img" width="100" height="100">
+                        </div>
+                        <div class="col-md-6">
+                            <h5>@item.ProductName</h5>
+                            <p class="text-muted mb-1">Qty: @item.Quantity</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-outline-primary btn-sm">Buy Again</button>
+                            <button class="btn btn-outline-secondary btn-sm">View Details</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="card-footer bg-white text-end">
+                <button class="btn btn-primary">Track Package</button>
+                <button class="btn btn-outline-success">Leave Review</button>
+            </div>
+        </div>
+    }
+</div>

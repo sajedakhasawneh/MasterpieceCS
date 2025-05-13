@@ -1,0 +1,165 @@
+﻿@model Masterpiece.ViewModel.productFiltring
+
+<div class="container-fluid py-3 px-2">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="sidebar">
+              <div class="sidebar-header">
+                <h5 class="mb-0">Filter Products</h5>
+             </div>
+                <form asp-action="getAllProducts" method="get">
+                    <!-- Categories -->
+                    <div class="filter-section">
+                        <h6 class="filter-title">Categories</h6>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                       name="CategoryIds" value="@category.Id"
+                                @(Model.SelectedCategoryIds?.Contains(category.Id) == true ? "checked" : "") />
+                                <label class="form-check-label">@category.Name</label>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Ratings -->
+                    <div class="filter-section mt-3">
+                        <h6>Customer Rating</h6>
+                        @for (int i = 5; i >= 3; i--)
+                        {
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input me-2" type="checkbox"
+                                       name="Ratings" value="@i"
+                                @(Model.SelectedRatings?.Contains(i) == true ? "checked" : "") />
+
+                                <label class="form-check-label d-flex align-items-center">
+                                    @for (int j = 0; j < i; j++)
+                                    {
+                                        <i class="bi bi-star-fill text-warning me-1"></i>
+                                    }
+                                    <span class="text-muted ms-1">& up</span>
+                                </label>
+                            </div>
+                        }
+                    </div>
+
+
+
+                    <!-- Price -->
+                    <div class="filter-section mt-3">
+                        <h6>Max Price</h6>
+                        <input type="range" name="MaxPrice" class="form-range" min="0" max="1000" step="10"
+                               value="@(Model.MaxPrice ?? 1000)" />
+                        <p>Up to: <strong>@(Model.MaxPrice ?? 1000) JOD</strong></p>
+                    </div>
+
+                    <!-- Date Sorting -->
+                    <div class="filter-section mt-3">
+                        <h6>Date Added</h6>
+                        @* Uncomment below if date sort is needed *@
+                        @* <div class="form-check"> *@
+                        @*     <input class="form-check-input" type="radio" name="SortOrder" value="new" @(Model.SortOrder == "new" ? "checked" : "") /> *@
+                        @*     <label class="form-check-label">Newest First</label> *@
+                        @* </div> *@
+                        @* <div class="form-check"> *@
+                        @*     <input class="form-check-input" type="radio" name="SortOrder" value="old" @(Model.SortOrder == "old" ? "checked" : "") /> *@
+                        @*     <label class="form-check-label">Oldest First</label> *@
+                        @* </div> *@
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Apply</button>
+                        <a asp-action="getAllProducts" class="btn btn-secondary w-100">Reset</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Products List -->
+        <div class="col-lg-9">
+            <div class="row">
+                @if (Model.Products != null && Model.Products.Any())
+                {
+                    foreach (var product in Model.Products)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="product-card">
+                                @* <form asp-action="addToWishlist" asp-controller="User" method="post"> *@
+                                @*     <input type="hidden" name="productId" value="@product.Id" /> *@
+                                @*     <button type="submit" class="wishlist-btn" aria-label="Add to wishlist"> *@
+                                @*         <i class="bi bi-heart"></i> *@
+                                @*     </button> *@
+                                @* </form> *@
+
+                                <form asp-action="addToWishlist" asp-controller="User" method="post">
+                                    <input type="hidden" name="productId" value="@product.Id" />
+                                    <button type="submit" class="wishlist-btn border-0 bg-transparent" aria-label="Add to wishlist">
+                                        @if (Model.WishlistProductIds.Contains(product.Id))
+                                        {
+                                            <i class="bi bi-heart-fill text-danger"></i> <!-- Filled heart -->
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-heart"></i> <!-- Outline heart -->
+                                        }
+                                    </button>
+                                </form>
+
+                                @* <form asp-action="singleProduct" asp-controller="services" asp-route-id="@product.Id"> *@
+                                @*     <div class="position-relative"> *@
+                                @*         <img src="@product.ImageUrl" class="product-img" alt="@product.Name" /> *@
+                                @*         <span class="product-badge">New</span> *@
+                                @*     </div> *@
+                                @* </form> *@
+                                <a asp-controller="services" asp-action="singleProduct" asp-route-id="@product.Id">
+                                    <div class="position-relative">
+                                        <img src="@product.ImageUrl" class="product-img" alt="@product.Name" />
+                                        <span class="product-badge">New</span>
+                                    </div>
+                                </a>
+
+
+                                <div class="p-3">
+                                    <!-- Rating -->
+                                    <div class="product-rating mb-2">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (i < product.Rating)
+                                            {
+                                                <i class="bi bi-star-fill"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-star"></i>
+                                            }
+                                        }
+                                    </div>
+
+                                    <h5 class="mb-2">@product.Name</h5>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="product-price text-danger fw-bold">@product.Price JOD</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                    @* <p class="text-muted mt-2">Category: @product.Category.Name</p> *@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <p>No products found with the selected filters.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

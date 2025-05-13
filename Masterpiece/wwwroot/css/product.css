@@ -1,0 +1,341 @@
+﻿/************************************************
+ Page Layout */
+/*.container3 {
+	padding-left: 10px;
+	margin-right: 150px;*/ /* Space on the right */
+/*}
+
+.filter-sidebar {
+	width: 180px;
+	margin-right: 75px;*/  /*Space between filter and products */
+	/*padding: 15px;
+	 background: #f8f9fa; 
+	border-radius: 8px;
+}
+
+	.filter-sidebar h4 {
+		margin-bottom: 20px;
+	}
+
+.product-card {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+	.product-card:hover {
+		transform: scale(1.05);
+		box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+	}
+
+.rating i {
+	color: #ffcc00;  Gold star color 
+}
+
+.add-to-cart {
+	background-color: #C8D5C1;
+	color: white;
+	border-radius: 5px;
+	width: 100%;
+}
+
+	.add-to-cart:hover {
+		background-color: #C8D5C1;
+	}*/
+
+/*
+*************img product*********************************/
+/*.productGrid img {
+	 width: 85%; 
+	height: 300.8px !important;
+	 padding-top: 15px; 
+	 padding-left: 50px; 
+}
+
+.btn-filter {
+	background-color: #C8D5C1;
+	color: #fff;
+	padding: 10px 20px;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 17px;
+	cursor: pointer;
+	border: none;
+}*/
+
+
+/* Container for the entire layout */
+/*.container {
+	max-width: 1200px;
+	margin: 0 auto;*/  /*Center the container*/ 
+/*}*/
+
+/* Side-by-side layout for the sidebar and product grid */
+/*.row {
+	display: flex;
+	gap: 30px;*/ /* Add gap between sidebar and product grid */
+	/*margin-top: 20px;*/  /*Add margin to the top*/ 
+/*}*/
+
+/* Sidebar - making sure it takes up less space on smaller screens */
+/*aside {
+	background-color: #f7f7f7;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	flex: 1 0 25%;*/  /*Sidebar takes 25% of the space 
+*/	/*position: relative;
+}*/
+
+/* Product Grid - takes the remaining space */
+/*.productGrid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	flex: 1;*/ /* Make sure the product grid takes the remaining space */
+/*}*/
+
+/* Each product card */
+/*.product-card {
+	max-width: 100%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease;
+	border-radius: 8px;
+}
+
+	.product-card:hover {
+		transform: translateY(-10px);
+	}*/
+
+/* Reduce space between cards in the grid */
+/*.productGrid .col-md-4 {
+	flex: 1 0 30%;*/  /*3 cards per row on large screens 
+*/	/*max-width: 33.333%;*/  /*Ensure that each product takes up 1/3 of the row */
+/*}*/
+/*
+ Responsive Design for smaller screens*/ 
+/*@media (max-width: 991px) {
+	.productGrid .col-md-4 {
+		flex: 1 0 45%;*/ /* 2 products per row on medium screens */
+	/*}
+}
+
+@media (max-width: 767px) {
+	.productGrid .col-md-4 {
+		flex: 1 0 100%;*/  /*1 product per row on small screens */
+	/*}
+
+	aside {
+		flex: 1 0 100%;*/  /*Sidebar takes full width on small screens */
+	/*}
+}*/
+
+/* Adjustments for form inputs and buttons */
+/*.form-label {
+	font-weight: bold;
+}
+
+.form-select, .form-control {
+	margin-bottom: 10px;
+}
+
+.btn {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	border-radius: 5px;
+}*/
+
+
+/* Container for the entire layout */
+/*.container {
+	max-width: 1200px;
+	margin: 0 auto;*/  /*Center the container */
+/*}*/
+
+/* Flexbox container for sidebar and product grid */
+/*.row {
+	display: flex;
+	gap: 30px;*/  /*Space between sidebar and product grid */
+	/*margin-top: 20px;
+}*/
+
+/* Sidebar style: Flex behavior should be fixed width */
+/*.filter-sidebar {
+	flex: 0 0 280px;*/  /*Fixed width for the sidebar */
+	/*padding: 15px;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+}*/
+
+/* Product grid style: This will take the remaining space */
+/*.productGrid {*/
+/*	display: flex;
+	flex-wrap: wrap;*/
+	/*gap: 20px;
+	flex: 1;*/ /* This will make sure the grid takes up the remaining space */
+/*}*/
+
+/* Product Card Style */
+/*.product-card {
+	max-width: 100%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease;
+	border-radius: 8px;
+}*/
+
+	/*.product-card:hover {
+		transform: translateY(-10px);
+	}*/
+
+/* Column for products (ensuring the cards fit side by side) */
+/*.productGrid .col-md-4 {
+	flex: 1 0 30%;*/ /* 3 cards per row on large screens */
+	/*max-width: 33.333%;
+}*/
+/**/
+/*
+.product-card {
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	transition: all 0.3s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+	.product-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	}
+
+.product-img-wrapper {
+	height: 220px;
+	background-color: #f5f5f5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+
+	.product-img-wrapper img {
+		max-height: 100%;
+		max-width: 100%;
+		object-fit: contain;
+	}*/
+
+/*.product-name {
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+.product-price {
+	font-size: 1rem;
+	color: #444;
+}*/
+
+/*.add-to-cart {
+	background-color: #C8D5C1;
+	color: #fff;
+	border: none;
+	padding: 6px 16px;
+	border-radius: 6px;
+	font-size: 0.95rem;
+	font-weight: 500;
+	transition: background-color 0.3s ease;
+	width: auto;
+	display: inline-block;
+	margin-top: 10px;
+}
+
+	.add-to-cart:hover {
+		background-color: #a5b89a;
+	}*/
+/**/
+
+/* Responsive Design for smaller screens */
+/*@media (max-width: 991px) {
+	.productGrid .col-md-4 {
+		flex: 1 0 45%;*/ /* 2 products per row on medium screens */
+	/*}
+}
+
+@media (max-width: 767px) {
+	.productGrid .col-md-4 {
+		flex: 1 0 100%;*/ /* 1 product per row on small screens */
+	/*}
+
+	.filter-sidebar {
+		flex: 1 0 100%;*/ /* Sidebar takes full width on small screens */
+	/*}
+}*/
+
+
+
+/*body {
+	display: flex;
+	background-color: #F6F4F0;
+	min-height: 100vh;
+}
+
+.sidebar {
+	min-width: 250px;
+	background-color: #D9E0D7;
+	padding: 20px;
+	border-right: 1px solid #dee2e6;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.products {
+	flex: 1;
+	padding: 20px;
+}
+
+.card {
+	transition: transform 0.2s;
+}
+
+	.card:hover {
+		transform: scale(1.03);
+	}
+
+.rating {
+	color: #FFD700;
+	cursor: pointer;
+	font-size: 1.2em;
+}
+
+.price {
+	font-weight: bold;
+}
+
+.form-select, .form-range {
+	height: 50px;
+}
+
+.form-label {
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #5F6759;
+	border: none;
+}
+
+	.btn-primary:hover {
+		background-color: #4A5A4B;
+	}*/
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+.sidebar {
+	min-width: 250px;
+	background-color: #D9E0D7;
+	padding: 20px;
+	border-right: 1px solid #dee2e6;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}

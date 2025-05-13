@@ -39,6 +39,10 @@
 
 //////////////////////////////////////imgSliderattop///////////////////////////////////////////
 
+$(document).ready(function () {
+   
+
+
 var $slider = $('.slideshow .slider'),
     maxItems = $('.item', $slider).length,
     dragging = false,
@@ -117,4 +121,10 @@ $('.slideshow-text').slick({
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
 });
 
+});
+
+    function toggleNavbar() {
+    const nav = document.getElementById("navbarSupportedContent");
+    nav.classList.toggle("show");
+}
 

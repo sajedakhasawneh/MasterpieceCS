@@ -16,11 +16,21 @@
 	<link rel="stylesheet" href="~/css/payment.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/specialForm.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/product.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/productFilter.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/Checkout.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/singleProduct.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/Masterpiece.styles.css" asp-append-version="true" />
-	
+	<link rel="stylesheet" href="~/lib/slick-carousel/slick/slick.css" />
+	<link rel="stylesheet" href="~/lib/slick-carousel/slick/slick-theme.css" />
 
 	<!-- Bootstrap 5 CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
@@ -38,11 +48,17 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-custom navbar-mainbg">
+        @* <nav class="navbar navbar-expand-custom navbar-mainbg"> *@
+		<nav class="navbar navbar-expand-lg navbar-mainbg">
+
             <a class="navbar-brand navbar-logo" href="/HTML/home.html">Basma</a>
-            <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars text-white"></i>
-            </button>
+            @* <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> *@
+            @*     <i class="fas fa-bars text-white"></i> *@
+            @* </button> *@
+
+			<button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+				<span class="navbar-toggler-icon">☰</span>
+			</button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                      <div class="hori-selector">
@@ -51,20 +67,12 @@
 					 	<div class="right"> 
 					</div> 
 					</div> 
-                    @* <li class="nav-item">
-                    @*     <a class="nav-link" href="home.html" href="javascript:void(0);">Home</a> *@
-                    @* </li> *@
-                    @* <li class="nav-item active"> *@
-                    @*     <a class="nav-link" href="/HTML/services.html" href="javascript:void(0);">Services</a> *@
-                    @* </li> *@
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link" href="specialOrder.html" href="javascript:void(0);">Special Order</a> *@
-                    @* </li> *@
+
 					<li class="nav-item">
 						<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" asp-controller="services" asp-action="category">Services</a>
+						<a class="nav-link" asp-controller="services" asp-action="getAllProducts">Shop</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" asp-controller="specialOrder" asp-action="Index">Special Order</a>
@@ -75,18 +83,41 @@
 					<li class="nav-item">
 						<a class="nav-link" asp-controller="Home" asp-action="contact">contact us</a>
 					</li>
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link" href="aboutUs.html" href="javascript:void(0);">About us</a> *@
-                    @* </li> *@
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link" href="contact.html" href="javascript:void(0);">Contact us</a> *@
-                    @* </li> *@
-                    <li class="nav-item">
-						<a class="nav-link" asp-controller="User" asp-action="Profile"><i class="fa fa-user" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="nav-item">
-						<a class="nav-link" asp-controller="payment" asp-action="payment"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                    </li>
+
+					@if (Context.Session.GetInt32("UserId") == null)
+					{
+					
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="User" asp-action="Register">
+								<i class="fas fa-sign-in-alt"></i> Login
+							</a>
+						</li>
+					}
+
+					else {
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="User" asp-action="Profile">
+								<i class="fas fa-user"></i> Profile
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="User" asp-action="Logout">
+								<i class="fas fa-sign-out-alt"></i> Logout
+							</a>
+						</li>
+					}
+			
+						<li class="nav-item">
+						<a class="nav-link" asp-controller="payment" asp-action="Cart">
+								<i class="fas fa-shopping-cart"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+						<a class="nav-link" asp-controller="User" asp-action="addToWishlist">
+								<i class="far fa-heart"></i>
+							</a>
+						</li>
                 </ul>
             </div>
         </nav>
@@ -173,6 +204,7 @@
 
 	<!-- Bootstrap 5 JS and jQuery  NAvbar -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <!-- NAvbar end -->
    <!-- slider -->
@@ -181,9 +213,15 @@
    <script src="/js/site.js"></script>
    <script src="/js/services.js"></script>
 	<script src="/js/register.js"></script>
+	<script src="/js/Cart.js"></script>
+	<script src="/js/ProductFilter.js"></script>
+	<script src="/js/singleProduct.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+

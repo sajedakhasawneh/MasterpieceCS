@@ -455,7 +455,7 @@ img {
 
 
 
-
+/*
 
 
 @media (min-width: 992px) {
@@ -482,8 +482,28 @@ img {
             flex-basis: auto;
         }
 }
+*/
 
+/* Always hide the toggler by default */
+.navbar-toggler {
+    display: none;
+}
 
+/* Only show it on screens smaller than 992px */
+@media (max-width: 991px) {
+    .navbar-toggler {
+        display: block;
+    }
 
+    #navbarSupportedContent {
+        display: none;
+        flex-direction: column;
+        background-color: #F5EFE7;
+        width: 100%;
+    }
 
+        #navbarSupportedContent.show {
+            display: flex;
+        }
+}
 

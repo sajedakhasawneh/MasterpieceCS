@@ -1,79 +1,413 @@
 ﻿@model Masterpiece.Models.User
 
-<div class="container">
-    <h1>Edit Profile</h1>
-    <hr>
-    <div class="row">
-        <!-- Left column -->
-        <div class="col-md-3">
-            <div class="text-center">
-                <img src="https://png.pngitem.com/pimgs/s/150-1503945_transparent-user-png-default-user-image-png-png.png" class="img-thumbnail rounded-circle" alt="avatar">
-                <br><br>
-                <h6>Upload a different photo...</h6>
-                <input type="file" class="form-control">
-            </div>
-        </div>
+@{
+    ViewData["Title"] = "editProfile";
+    Layout = "/Views/Shared/Profile.cshtml";
+}
 
-        <!-- Edit form column -->
-        <div class="col-md-9">
-            <h3>Personal Info</h3>
-            @if (Model != null)
-            {
+@* <h1>editProfile</h1> *@
 
-                <form asp-action="editRrofile" method="post">
-                    @Html.AntiForgeryToken()
-                    <div class="row mb-3">
-                    <label for="username" class="col-md-3 col-form-label">Username:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="username" class="form-control" value="@Model.Name">
-                    </div>
-                </div>
+@* <h4>User</h4> *@
+@* <hr /> *@
+@* <div class="row"> *@
+@*     <div class="col-md-4"> *@
+@*         <form asp-action="editProfile"> *@
+@*             <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+@*             <input type="hidden" asp-for="Id" /> *@
+@*             <div class="form-group"> *@
+@*                 <label asp-for="Name" class="control-label"></label> *@
+@*                 <input asp-for="Name" class="form-control" /> *@
+@*                 <span asp-validation-for="Name" class="text-danger"></span> *@
+@*             </div> *@
+@*             <div class="form-group"> *@
+@*                 <label asp-for="Email" class="control-label"></label> *@
+@*                 <input asp-for="Email" class="form-control" /> *@
+@*                 <span asp-validation-for="Email" class="text-danger"></span> *@
+@*             </div> *@
+@*             <div class="form-group"> *@
+@*                 <label asp-for="Password" class="control-label"></label> *@
+@*                 <input asp-for="Password" class="form-control" /> *@
+@*                 <span asp-validation-for="Password" class="text-danger"></span> *@
+@*             </div> *@
+@*             <div class="form-group"> *@
+@*                 <label asp-for="Phone" class="control-label"></label> *@
+@*                 <input asp-for="Phone" class="form-control" /> *@
+@*                 <span asp-validation-for="Phone" class="text-danger"></span> *@
+@*             </div> *@
+@*             <div class="form-group"> *@
+@*                 <label asp-for="City" class="control-label"></label> *@
+@*                 <input asp-for="City" class="form-control" /> *@
+@*                 <span asp-validation-for="City" class="text-danger"></span> *@
+@*             </div> *@
+@*             <div class="form-group"> *@
+@*                 <label asp-for="Role" class="control-label"></label> *@
+@*                 <input asp-for="Role" class="form-control" /> *@
+@*                 <span asp-validation-for="Role" class="text-danger"></span> *@
+@*             </div> *@
+@*             <div class="form-group"> *@
+@*                 <input type="submit" value="Save" class="btn btn-primary" /> *@
+@*             </div> *@
+@*         </form> *@
+@*     </div> *@
+@* </div> *@
 
-                <div class="row mb-3">
-                    <label for="email" class="col-md-3 col-form-label">Email:</label>
-                    <div class="col-md-9">
-                        <input type="email" id="email" class="form-control" value="@Model.Email">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="phone" class="col-md-3 col-form-label">Phone Number:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="phone" class="form-control" value="@Model.Phone">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="city" class="col-md-3 col-form-label">City:</label>
-                    <div class="col-md-9">
-                        <input type="text" id="city" class="form-control" value="@Model.City">
-                    </div>
-                </div>
-
-
-                <div class="row mb-3">
-                    <label for="password" class="col-md-3 col-form-label">Password:</label>
-                    <div class="col-md-9">
-                        <input type="password" id="password" class="form-control" value="">
-                    </div>
-                </div>
+@* <div> *@
+@*     <a asp-action="Index">Back to List</a> *@
+@* </div> *@
 
 
-                <div class="row mb-3">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9">
-                        <button type="button" class="btn-save">Save Changes</button>
-                        <button type="reset" class="btn-cancle">Cancel</button>
-                    </div>
-                </div>
-            </form>}
-            else
-            {
-                <p class="text-danger">No user data found.</p>
-            }
+@* COOOOOOOOODDDDDDDDDDDDDEEEEEEEE *@
+
+
+@* <div class="container"> *@
+@*     <h1>Edit Profile</h1> *@
+@*     <hr> *@
+@*     <div class="row"> *@
+@*         <!-- Left column --> *@
+@*         <div class="col-md-3"> *@
+@*             <div class="text-center"> *@
+@*                 <img src="https://png.pngitem.com/pimgs/s/150-1503945_transparent-user-png-default-user-image-png-png.png" class="img-thumbnail rounded-circle" alt="avatar"> *@
+@*                 <br><br> *@
+@*                 <h6>Upload a different photo...</h6> *@
+@*                 <input type="file" class="form-control"> *@
+@*             </div> *@
+@*         </div> *@
+
+@*         <!-- Edit form column --> *@
+@*         <div class="col-md-9"> *@
+@*             <h3>Personal Info</h3> *@
+@*             <form asp-action="editProfile"> *@
+@*                 <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+@*                 <input type="hidden" asp-for="Id" /> *@
+@*                 <div class="row mb-3"> *@
+@*                     <label asp-for="Name" class="col-md-3 col-form-label">Name</label> *@
+@*                     <input asp-for="Name" class="form-control" /> *@
+@*                     <span asp-validation-for="Name" class="text-danger"></span> *@
+@*                 </div> *@
+
+@*                 <div class="row mb-3"> *@
+@*                     <label asp-for="Email" class="col-md-3 col-form-label">Email</label> *@
+@*                     <input asp-for="Email" class="form-control" /> *@
+@*                     <span asp-validation-for="Email" class="text-danger"></span> *@
+@*                 </div> *@
+
+@*                 <div class="form-group"> *@
+@*                     <label asp-for="Phone" class="col-md-3 col-form-label"></label> *@
+@*                     <input asp-for="Phone" class="form-control" /> *@
+@*                     <span asp-validation-for="Phone" class="text-danger"></span> *@
+@*                 </div> *@
+
+@*                 <div class="form-group"> *@
+@*                     <label asp-for="City" class="col-md-3 col-form-label"></label> *@
+@*                     <input asp-for="City" class="form-control" /> *@
+@*                     <span asp-validation-for="City" class="text-danger"></span> *@
+@*                 </div> *@
+@*                 <br /> *@
+@*                 <div class="form-group"> *@
+@*                         <input type="submit" class="btn-save" value="Save Changes" /> *@
+@*                         <input type="reset" class="btn-cancle" value="Cancel" /> *@
+@*                 </div> *@
+@*             </form> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @{ *@
+@*     Layout = "/Views/Shared/Profile.cshtml"; *@
+@* } *@
+
+
+@* <!-- Edit Profile Section --> *@
+@* <div class="col-md-9"> *@
+@*     <div class="d-flex justify-content-between align-items-center mb-4"> *@
+@*         <h2>Edit Profile</h2> *@
+@*         <div> *@
+@*             <a href="profile.html" class="btn btn-outline-secondary"> *@
+@*                 <i class="fas fa-times"></i> Cancel *@
+@*             </a> *@
+@*         </div> *@
+@*     </div> *@
+
+@*     <!-- Profile Picture Upload --> *@
+@*     <div class="card profile-card mb-4"> *@
+@*         <div class="card-body text-center py-4"> *@
+@*             <div class="image-upload-wrapper mb-3"> *@
+@*                 <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img" id="profileImage"> *@
+@*                 <input type="file" id="imageUpload" class="image-upload-input" accept="image/*"> *@
+@*             </div> *@
+@*             <p class="text-muted">Click on the image to change your profile photo</p> *@
+@*             <button class="btn btn-outline-danger btn-sm" id="removeImage"> *@
+@*                 <i class="far fa-trash-alt"></i> Remove Photo *@
+@*             </button> *@
+@*         </div> *@
+@*     </div> *@
+
+@*     <!-- Personal Information Form --> *@
+@*     <div class="card profile-card"> *@
+@*         <div class="card-body"> *@
+@*             <form id="profileForm"> *@
+@*                 <!-- Basic Information Section --> *@
+@*                 <div class="form-section"> *@
+@*                     <h4 class="section-title">Basic Information</h4> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="firstName" class="form-label">First Name</label> *@
+@*                                 <input type="text" class="form-control" id="firstName" value="John" required> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="lastName" class="form-label">Last Name</label> *@
+@*                                 <input type="text" class="form-control" id="lastName" value="Doe" required> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+
+@*                     <div class="row"> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="email" class="form-label">Email Address</label> *@
+@*                                 <input type="email" class="form-control" id="email" value="john.doe@example.com" required> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="phone" class="form-label">Phone Number</label> *@
+@*                                 <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567"> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+
+@*                     <div class="row"> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="birthDate" class="form-label">Date of Birth</label> *@
+@*                                 <input type="date" class="form-control" id="birthDate" value="1990-01-15"> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label class="form-label">Gender</label> *@
+@*                                 <div> *@
+@*                                     <div class="form-check form-check-inline"> *@
+@*                                         <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked> *@
+@*                                         <label class="form-check-label" for="male">Male</label> *@
+@*                                     </div> *@
+@*                                     <div class="form-check form-check-inline"> *@
+@*                                         <input class="form-check-input" type="radio" name="gender" id="female" value="female"> *@
+@*                                         <label class="form-check-label" for="female">Female</label> *@
+@*                                     </div> *@
+@*                                     <div class="form-check form-check-inline"> *@
+@*                                         <input class="form-check-input" type="radio" name="gender" id="other" value="other"> *@
+@*                                         <label class="form-check-label" for="other">Other</label> *@
+@*                                     </div> *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <!-- Communication Preferences Section --> *@
+@*                 <div class="form-section"> *@
+@*                     <h4 class="section-title">Communication Preferences</h4> *@
+@*                     <div class="mb-3"> *@
+@*                         <div class="form-check form-switch mb-2"> *@
+@*                             <input class="form-check-input" type="checkbox" id="emailPromotions" checked> *@
+@*                             <label class="form-check-label" for="emailPromotions">Email Promotions</label> *@
+@*                         </div> *@
+@*                         <div class="form-check form-switch mb-2"> *@
+@*                             <input class="form-check-input" type="checkbox" id="smsNotifications"> *@
+@*                             <label class="form-check-label" for="smsNotifications">SMS Notifications</label> *@
+@*                         </div> *@
+@*                         <div class="form-check form-switch"> *@
+@*                             <input class="form-check-input" type="checkbox" id="newsletter" checked> *@
+@*                             <label class="form-check-label" for="newsletter">Newsletter Subscription</label> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <!-- Password Change Section --> *@
+@*                 <div class="form-section"> *@
+@*                     <h4 class="section-title">Change Password</h4> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="currentPassword" class="form-label">Current Password</label> *@
+@*                                 <input type="password" class="form-control" id="currentPassword"> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="newPassword" class="form-label">New Password</label> *@
+@*                                 <input type="password" class="form-control" id="newPassword"> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="col-md-6"> *@
+@*                             <div class="mb-3"> *@
+@*                                 <label for="confirmPassword" class="form-label">Confirm New Password</label> *@
+@*                                 <input type="password" class="form-control" id="confirmPassword"> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <!-- Form Actions --> *@
+@*                 <div class="d-flex justify-content-between"> *@
+@*                     <button type="button" class="btn btn-outline-danger" id="deleteAccount"> *@
+@*                         <i class="far fa-trash-alt"></i> Delete Account *@
+@*                     </button> *@
+@*                     <div> *@
+@*                         <a href="profile.html" class="btn btn-outline-secondary me-2"> *@
+@*                             Cancel *@
+@*                         </a> *@
+@*                         <button type="submit" class="btn btn-primary"> *@
+@*                             <i class="fas fa-save"></i> Save Changes *@
+@*                         </button> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </form> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+
+
+
+
+
+
+
+
+
+<!-- Edit Profile Section -->
+<div class="col-md-9">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Edit Profile</h2>
+        <div>
+            <a href="profile.html" class="btn btn-outline-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
         </div>
     </div>
+
+    <!-- Profile Picture Upload -->
+    <div class="card profile-card mb-4">
+        <div class="card-body text-center py-4">
+            <div class="image-upload-wrapper mb-3">
+                <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img" id="profileImage">
+                <input type="file" id="imageUpload" class="image-upload-input" accept="image/*">
+            </div>
+            <p class="text-muted">Click on the image to change your profile photo</p>
+            <button class="btn btn-outline-danger btn-sm" id="removeImage">
+                <i class="far fa-trash-alt"></i> Remove Photo
+            </button>
+        </div>
+    </div>
+
+    <!-- Personal Information Form -->
+    <div class="card profile-card">
+        <div class="card-body">
+            <form id="profileForm" asp-action="editProfile">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- Basic Information Section -->
+                <div class="form-section">
+                    <h4 class="section-title">Basic Information</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label">Name</label>
+                                <input asp-for="Name" type="text" class="form-control" value="@Model.Name" required>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label">Email Address</label>
+                                <input asp-for="Email" type="email" class="form-control" id="email" value="@Model.Email" disabled>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Phone" class="form-label">Phone Number</label>
+                                <input asp-for="Phone" type="tel" class="form-control" id="phone" value="@Model.Phone">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="City" class="form-label">City</label>
+                                <input asp-for="City" type="text" class="form-control"  value="@Model.City">
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="birthDate" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="birthDate" value="1990-01-15">
+                            </div>
+                        </div>
+                        @* <div class="col-md-6"> *@
+                        @*     <div class="mb-3"> *@
+                        @*         <label class="form-label">Gender</label> *@
+                        @*         <div> *@
+                        @*             <div class="form-check form-check-inline"> *@
+                        @*                 <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked> *@
+                        @*                 <label class="form-check-label" for="male">Male</label> *@
+                        @*             </div> *@
+                        @*             <div class="form-check form-check-inline"> *@
+                        @*                 <input class="form-check-input" type="radio" name="gender" id="female" value="female"> *@
+                        @*                 <label class="form-check-label" for="female">Female</label> *@
+                        @*             </div> *@
+                        @*             <div class="form-check form-check-inline"> *@
+                        @*                 <input class="form-check-input" type="radio" name="gender" id="other" value="other"> *@
+                        @*                 <label class="form-check-label" for="other">Other</label> *@
+                        @*             </div> *@
+                        @*         </div> *@
+                        @*     </div> *@
+                        @* </div> *@
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a asp-action="Profile" class="btn btn-outline-secondary me-2">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </div>
+                </form>
+                </div>
 </div>
-<br>
-<br>
-<br>
+</div>
+
+               

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Register";
+    Layout = "/Views/Shared/Register.cshtml";
 }
 
 <section class="user-authentication">
@@ -34,7 +35,7 @@
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="forms_field">
-                            <input asp-for="Password" class="forms_field-input" placeholder="Password" required />
+                            <input type="password" asp-for="Password" class="forms_field-input" placeholder="Password" required />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                     </fieldset>
@@ -67,7 +68,7 @@
                             <span asp-validation-for="Role" class="text-danger"></span>
                         </div>
                         <div class="forms_field">
-                            <input asp-for="Password" class="forms_field-input" placeholder="Password" required />
+                            <input type="password" asp-for="Password" class="forms_field-input" placeholder="Password" required />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                     </fieldset>

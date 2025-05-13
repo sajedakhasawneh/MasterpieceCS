@@ -3,19 +3,15 @@ using System.Collections.Generic;
 
 namespace Masterpiece.Models;
 
-using System.ComponentModel.DataAnnotations;
-
 public partial class ContactU
 {
     public int Id { get; set; }
 
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
 
-    [Required(ErrorMessage = "Subject is required")]
-    public string Subject { get; set; }
+    public string Subject { get; set; } = null!;
 
-    [Required(ErrorMessage = "Message is required")]
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 
     public string? Status { get; set; }
 

@@ -1,0 +1,57 @@
+﻿* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.wishlist-card {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+    .wishlist-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-5px);
+    }
+
+.product-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.price {
+    font-weight: 600;
+    color: #dc3545;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.discount-badge {
+    background-color: #dc3545;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.availability-in-stock {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.availability-out-of-stock {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+
+.heart-filled {
+    color: red;
+}

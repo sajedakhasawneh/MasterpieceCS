@@ -1,0 +1,70 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "addToWishlist";
+    Layout = "/Views/Shared/Profile.cshtml";
+}
+
+
+<!-- Wishlist Section -->
+<div class="col-md-9">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>My Wishlist <span class="badge bg-secondary">5 items</span></h2>
+        <div>
+            <button class="btn btn-outline-danger">
+                <i class="far fa-trash-alt"></i> Clear All
+            </button>
+        </div>
+    </div>
+
+    <!-- Wishlist Items -->
+    <div class="card wishlist-card">
+        @foreach (var item in Model){
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                        <img src="@item.ImageUrl" alt="@item.Name" class="product-img">
+                </div>
+                <div class="col-md-5">
+                    <h5>@item.Name</h5>
+                    <p class="mb-2"><span class="availability-in-stock"><i class="fas fa-check-circle"></i> In Stock</span></p>
+                    <div class="d-flex align-items-center">
+                        <span class="price">@item.Price JOD</span>
+                        <span class="old-price ms-2">@item.Price JOD</span>
+                        <span class="discount-badge ms-2">31% OFF</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group mb-3">
+                       
+                    </div>
+                </div>
+                <div class="col-md-2 text-end">
+                    <form method="post" action="@Url.Action("RemoveItem", "User")">
+                    <input type="hidden" name="Id" value="@item.Id" />
+                    <button class="btn btn-danger mb-2" title="Remove">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    </form>
+
+                    @*  <form method="post" action="@Url.Action("addItemToCart","payment")"> *@
+                    @*         <input type="hidden" name="Id" value="@item.Id" /> *@
+                    @* <button class="btn btn-primary w-100"> *@
+                    @*     <i class="fas fa-shopping-cart"></i> Add to Cart *@
+                    @* </button> *@
+                    @* </form> *@
+
+                    <form asp-controller="payment" asp-action="addItemToCart" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="productId" value="@item.Id" />
+                            <button class="btn btn-primary w-100"> 
+                            <i class="fas fa-shopping-cart"></i> Add to Cart 
+                            </button>
+                     </form>
+
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+</div>
+
