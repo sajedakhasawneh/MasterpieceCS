@@ -1,102 +1,207 @@
-﻿@model Masterpiece.Models.SpecialOrder
+﻿@model Masterpiece.ViewModel.SpecialOrderViewModel
 
-<section>
-    <div class="container" style= "padding-left: 150px;">
-        <div class="row g-0">
-            <!-- Big Square -->
-            <div class="col-12 col-md-6 col-lg-4 position-relative">
-                <img src="/img/formgallery7.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+
+
+<section class="design-hero text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Custom Design Request</h1>
+        <p class="lead">Get a unique handmade product crafted just for you</p>
+    </div>
+</section>
+
+<div class="container-fluid mb-5">
+    <div class="row">
+        <!-- Main Form Column -->
+        <div class="col-lg-8">
+            <div class="form-section">
+                <h2 class="mb-4">Design Details</h2>
+
+                <form asp-action="specialForm" method="post" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Product Type Selection -->
+                    <div class="mb-4">
+                        <label class="form-label">1. What type of product are you looking for?</label>
+                        <div class="d-flex flex-wrap">
+                            @foreach (var cat in Model.Categories)
+                            {
+                                <label class="category-badge">
+                                    <input type="radio" name="SelectedCategory" value="@cat" hidden required />
+                                    @cat
+                                </label>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Design Inspiration -->
+                    <div class="mb-4">
+                        <label class="form-label">2. Design Inspiration</label>
+                        <div class="upload-area">
+                            <p>Drag & drop your inspiration images here or click to browse</p>
+                            <input asp-for="DesignUpload" type="file" accept="image/*" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="DesignDescription" class="form-label">Describe your design</label>
+                            <textarea asp-for="DesignDescription" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="mb-4">
+                        <label class="form-label">3. Product Details</label>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Size</label>
+                                <select asp-for="ProductSize" class="form-select">
+                                    <option value="">Choose size</option>
+                                    <option>Small</option>
+                                    <option>Medium</option>
+                                    <option>Large</option>
+                                    <option>Custom</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Color Theme</label>
+                                <select asp-for="ProductColor" class="form-select">
+                                    <option value="">Choose color</option>
+                                    <option>White</option>
+                                    <option>Beige</option>
+                                    <option>Pastel Colors</option>
+                                    <option>Vibrant Colors</option>
+                                    <option>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Price Range -->
+                    <div class="mb-4">
+                        <label class="form-label">4. Budget Range</label>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="MinBudget" class="form-label">Minimum Budget</label>
+                                <input asp-for="MinBudget" class="form-control" type="number" min="0"  />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MaxBudget" class="form-label">Maximum Budget</label>
+                                <input asp-for="MaxBudget" class="form-control" type="number" min="0"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Occasion & Timeline -->
+                    <div class="mb-4">
+                        <label class="form-label">4. Occasion & Timeline</label>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="ProductOccasion" class="form-label">Occasion</label>
+                                <select asp-for="ProductOccasion" class="form-select" asp-items="@(new SelectList(Model.Occasions))">
+                                    <option value="">-- Select Occasion --</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="NeededBy" class="form-label">Needed by date</label>
+                                <input asp-for="NeededBy" type="date" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <h3 class="mt-5 mb-4">5. Your Information</h3>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="CustomerName" class="form-label">Full Name</label>
+                            <input asp-for="CustomerName" class="form-control" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="CustomerEmail" class="form-label">Email Address</label>
+                            <input asp-for="CustomerEmail" class="form-control" type="email" required />
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="AdditionalNotes" class="form-label">Additional Notes</label>
+                        <textarea asp-for="AdditionalNotes" class="form-control"></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>
+                    </div>
+                </form>
+
+
             </div>
+        </div>
 
-            <!-- Blank Big Square with 3 Inner Squares -->
-            <div class="col-12 col-md-6 col-lg-4 d-flex flex-wrap position-relative">
-                <div class="col-6 p-0 position-relative">
-                    <img src="/img/formgallery1.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+        <!-- Features Column -->
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 20px;">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3 class="h4 mb-4">How It Works</h3>
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-pencil-alt feature-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Submit Your Request</h4>
+                                <p class="mb-0">Fill out this form with all your design details and preferences.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-comments feature-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Design Consultation</h4>
+                                <p class="mb-0">We'll contact you to discuss your request and finalize details.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-truck feature-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Receive Your Creation</h4>
+                                <p class="mb-0">Your custom handmade product will be delivered to your door.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6 p-0 position-relative">
-                    <img src="/img/formgallery2.jpg" class="img-fluid w-100 h-50 object-fit-cover">
-                </div>
-                <!-- <div class="col-6 p-0 position-relative">
-                  <img src="/img/formgallery3.jpg" class="img-fluid w-100 h-50 object-fit-cover">
-                </div>
-                <div class="col-6 p-0 position-relative" >
-                  <img src="/img/formgallery3.jpg" class="img-fluid w-100 h-50 object-fit-cover">
-                </div> -->
-            </div>
 
-            <!-- Vertical Rectangle -->
-            <div class="col-12 col-md-6 col-lg-2 position-relative">
-                <img src="/img/formgallery6.jpg" class="img-fluid w-100 h-50 object-fit-cover">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="h4 mb-4">Have Questions?</h3>
+                        <p>Our team is happy to help with any questions about custom orders.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i> (962) 798902468</li>
+                            <li><i class="fas fa-envelope me-2"></i> custom@handcrafted.com</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
-<section class="flexsection">
-    <section class="designForm">
-       @*  <form asp-controller="specialOrder" asp-action="SpecialForm">
-            <input type="hidden" asp-for="UserId" value="@ViewBag.userId" />
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Enter your name">
+</div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email">
 
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" placeholder="Enter your phone number">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const badges = document.querySelectorAll('.category-badge');
 
-            <label for="product">Type of Product</label>
-            <select id="product">
-                <option>Candles</option>
-                <option>Embroidery</option>
-                <option>Crochet</option>
-                <option>Re-zen</option>
-            </select>
+        badges.forEach(badge => {
+            badge.addEventListener('click', () => {
+                // Unselect all first
+                badges.forEach(b => b.classList.remove('selected'));
 
-            <label for="occasion">Occasion</label>
-            <select id="occasion">
-                <option>Wedding</option>
-                <option>Birthday</option>
-                <option>Graduation</option>
-                <option>Corporate Gift</option>
-            </select>
+                // Then select clicked one
+                badge.classList.add('selected');
 
-            <label for="date">Delivery Date</label>
-            <input type="date" id="date">
-
-            <label>Description</label>
-            <textarea rows="4" placeholder="Provide additional details..."></textarea>
-
-            <label for="img">Upload an Inspiration Image</label>
-            <input type="file" id="img">
-
-            <label>Budget Range</label>
-            <div class="budget-container">
-                <input type="number" id="minbd" placeholder="Min">
-                <input type="number" id="maxbd" placeholder="Max">
-            </div>
-
-            <input type="submit" value="Submit" class="btnsubmit">
-        </form> *@
-
-        <form asp-action="specialForm">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @* <div class="form-group"> *@
-            @*     <input type="hidden" asp-for="UserId" value="@ViewBag.userId" /> *@
-            @* </div> *@
-            <div class="form-group">
-                <label asp-for="Details" class="control-label"></label>
-                <input asp-for="Details" class="form-control" />
-                <span asp-validation-for="Details" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </section>
-</section>
-
+                // Manually check the input
+                const input = badge.querySelector('input[type="radio"]');
+                if (input) {
+                    input.checked = true;
+                }
+            });
+        });
+    });
+</script>

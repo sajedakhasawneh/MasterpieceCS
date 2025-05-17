@@ -69,11 +69,12 @@
                     </div>
 
                     <!-- Filter Buttons -->
-                    <div class="mt-4">
+                    <div class="mt-4" style="padding:20px;">
                         <button type="submit" class="btn btn-primary w-100 mb-2">Apply</button>
-                        <a asp-action="getAllProducts" class="btn btn-secondary w-100">Reset</a>
+                        <a asp-action="getAllProducts" class="btn btn-secondary w-100 mb-2">Reset</a>
                     </div>
                 </form>
+                <br />
             </div>
         </div>
 
@@ -98,7 +99,7 @@
                                     <button type="submit" class="wishlist-btn border-0 bg-transparent" aria-label="Add to wishlist">
                                         @if (Model.WishlistProductIds.Contains(product.Id))
                                         {
-                                            <i class="bi bi-heart-fill text-danger"></i> <!-- Filled heart -->
+                                            <i class="bi bi-heart-fill text-danger" style="color: gold;"></i> <!-- Filled heart -->
                                         }
                                         else
                                         {
@@ -116,7 +117,7 @@
                                 <a asp-controller="services" asp-action="singleProduct" asp-route-id="@product.Id">
                                     <div class="position-relative">
                                         <img src="@product.ImageUrl" class="product-img" alt="@product.Name" />
-                                        <span class="product-badge">New</span>
+                                        @* <span class="product-badge">New</span> *@
                                     </div>
                                 </a>
 
@@ -128,11 +129,11 @@
                                         {
                                             if (i < product.Rating)
                                             {
-                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill" style="color: gold;"></i>
                                             }
                                             else
                                             {
-                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star" style="color: gold;"></i>
                                             }
                                         }
                                     </div>
@@ -144,6 +145,7 @@
                                             <span class="product-price text-danger fw-bold">@product.Price JOD</span>
                                         </div>
                                         <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-cart-fill me-2"></i>
                                             Add to Cart
                                         </button>
                                     </div>

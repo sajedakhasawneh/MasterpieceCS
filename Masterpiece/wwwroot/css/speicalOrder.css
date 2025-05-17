@@ -19,14 +19,13 @@
 }
 
 .cta-button {
-    color: white;
+    color: #F6F4F0;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     display: inline-block;
     margin-top: 20px;
     background-color: #5F6759;
-    ;
     transition: all 0.6s ease-in-out;
 }
 
@@ -54,7 +53,7 @@
         font-size: 32px;
         font-weight: 700;
         color: #333;
-        margin-bottom: 20px;
+        margin-bottom: 60px;
         opacity: 0;
         transform: translateY(20px);
         animation: fadeInUp 0.8s ease-in-out forwards;
@@ -75,7 +74,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 220px;
+    width: 230px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
@@ -86,9 +85,10 @@
 
 /* Icon Styling */
 .icon {
-    font-size: 40px;
+    font-size: 30px;
     color: #5F6759;
-    margin-bottom: 10px;
+    margin-top: 17px;
+    margin-bottom: 20px;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 

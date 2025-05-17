@@ -74,6 +74,8 @@ namespace Masterpiece.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Category));
         }
+
+
         public IActionResult deleteCategory(int id)
         {
             var category = _context.Categories.Find(id);
@@ -93,41 +95,37 @@ namespace Masterpiece.Controllers
             var product = _context.Products.ToList();
             return View(product);
         }
-
-        public IActionResult addProduct()
+        public IActionResult addProductAdmin()
         {
             var categories = _context.Categories.ToList();
-            var users = _context.Users.ToList();
+            var owners = _context.Users
+    .Where(u => u.Role == "owner")
+    .ToList();
 
-            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "Name");
-            ViewBag.OwnerId = new SelectList(users, "UserId", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.OwnerId = new SelectList(owners, "Id", "Name");
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult addProduct(Product product)
-        {
-            if (!ModelState.IsValid)
-            {
-                var categories = _context.Categories.ToList();
+        [ValidateAntiForgeryToken]
+        public IActionResult addProductAdmin(Product product)
+        { 
+            var categories = _context.Categories.ToList();
 
-                // ✅ Only include users with "Owner" role
-                var owners = _context.Users
-                    .Where(u => u.Role == "Owner")
-                    .ToList();
+            var owners = _context.Users
+                .Where(u => u.Role != null && u.Role.Trim().Equals("owner", StringComparison.OrdinalIgnoreCase))
+                .ToList();
 
-                ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
-                ViewBag.OwnerId = new SelectList(owners, "Id", "Name"); // adjust property names to match your User model
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.OwnerId = new SelectList(owners, "Id", "Name");
 
-                return View(product);
-            }
-
-            _context.Products.Add(product);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(viewProduct));
+            return View();
         }
+
+         
+        
 
 
 
@@ -304,7 +302,20 @@ namespace Masterpiece.Controllers
         }
 
 
+        public IActionResult specialDesign()
+        {
+            var orders = _context.SpecialOrders
+                                 .Include(o => o.User) // Eagerly load the related User
+                                 .ToList();
 
+            return View(orders);
+        }
+
+
+        //public IActionResult specialDesign(int id)
+        //{
+
+        //}
 
 
 

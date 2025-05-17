@@ -18,10 +18,49 @@ namespace Masterpiece.Controllers
             _context = context;
         }
 
-        public IActionResult Cart()
-        {
+        //public IActionResult Cart()
+        //{
+        //    int? userID = HttpContext.Session.GetInt32("UserId");
+
+
+        //    if (userID == null)
+        //    {
+        //        return RedirectToAction("Register", "User"); // Or any other logic for unauthenticated users
+        //    }
+        //    var cart = _context.Carts
+        //                       .Include(c => c.CartItems)
+        //                       .ThenInclude(ci => ci.Product)
+        //                       .FirstOrDefault(c => c.UserId == userID.Value);
+
+        //    if (cart == null || !cart.CartItems.Any())
+        //    {
+        //        // Return empty cart view
+        //        return View(new CartsVM());
+        //    }
+
+        //    // Map to ViewModel
+        //    var cartItemsVM = cart.CartItems.Select(ci => new CartItemViewModel
+        //    {
+        //        CartItemId = ci.CartItemId,
+        //        ProductId = ci.ProductId,
+        //        ProductName = ci.Product.Name,
+        //        ImageUrl = ci.Product.ImageUrl ?? "/images/default.png", // fallback
+        //        Price = ci.UnitPrice,
+        //        Quantity = ci.Quantity
+        //    }).ToList();
+
+        //    var viewModel = new CartsVM
+        //    {
+        //        CartItems = cartItemsVM
+        //    };
+
+        //    return View(viewModel);
+        //}
+
+
+        public IActionResult Cart() {
             int? userID = HttpContext.Session.GetInt32("UserId");
-         
+
             if (userID == null)
             {
                 return RedirectToAction("Register", "User"); // Or any other logic for unauthenticated users
@@ -57,7 +96,6 @@ namespace Masterpiece.Controllers
         }
 
 
-        
 
         [HttpPost]
         public IActionResult UpdateQuantity(int cartItemId, int newQuantity)
@@ -93,6 +131,7 @@ namespace Masterpiece.Controllers
             // Get the logged-in user's ID from session
             int? userID = HttpContext.Session.GetInt32("UserId");
 
+
             if (userID == null)
             {
                 return RedirectToAction("Register", "User"); // not logged in
@@ -117,6 +156,7 @@ namespace Masterpiece.Controllers
             // Check if product is already in cart
             var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
 
+            if (quantity == 0) quantity = 1;
             if (existingItem != null)
             {
                 // Update quantity
@@ -151,43 +191,44 @@ namespace Masterpiece.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult checkout()
-        {
-            int? userID = HttpContext.Session.GetInt32("UserId");
-            if (userID == null)
-            {
-                return RedirectToAction("Register", "User");
-            }
+        //[HttpPost]
+        //public IActionResult checkout()
+        //{
+        //    //int? userID = HttpContext.Session.GetInt32("UserId");
+        //    int? userID = 1;
+        //    if (userID == null)
+        //    {
+        //        return RedirectToAction("Register", "User");
+        //    }
 
-            var cart = _context.Carts
-                .Include(c => c.CartItems)
-                .FirstOrDefault(c => c.UserId == userID);
+        //    var cart = _context.Carts
+        //        .Include(c => c.CartItems)
+        //        .FirstOrDefault(c => c.UserId == userID);
 
-            if (cart == null || cart.CartItems.Count == 0)
-            {
-                return BadRequest("Cart is empty or not found.");
-            }
+        //    if (cart == null || cart.CartItems.Count == 0)
+        //    {
+        //        return BadRequest("Cart is empty or not found.");
+        //    }
 
-            //add to order
-            var order = new Order
-            {
-                UserId = cart.UserId,
-                CreatedAt = DateTime.Now,
-                TotalPrice = cart.CartItems.Sum(item => item.Quantity * item.UnitPrice),
-                //PaymentStatus = "Paid",
-                Status = "Pending",
-                OrderItems = cart.CartItems.Select(item => new OrderItem
-                {
-                    //OrderId = item.OrderId,
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.UnitPrice
-                }).ToList()
-            };
+        //    //add to order
+        //    var order = new Order
+        //    {
+        //        UserId = cart.UserId,
+        //        CreatedAt = DateTime.Now,
+        //        TotalPrice = cart.CartItems.Sum(item => item.Quantity * item.UnitPrice),
+        //        //PaymentStatus = "Paid",
+        //        Status = "Pending",
+        //        OrderItems = cart.CartItems.Select(item => new OrderItem
+        //        {
+        //            //OrderId = item.OrderId,
+        //            ProductId = item.ProductId,
+        //            Quantity = item.Quantity,
+        //            UnitPrice = item.UnitPrice
+        //        }).ToList()
+        //    };
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
 
@@ -212,6 +253,7 @@ namespace Masterpiece.Controllers
         public IActionResult checkoutView()
         {
             int? userID = HttpContext.Session.GetInt32("UserId");
+
 
             if (userID == null)
             {
@@ -242,7 +284,8 @@ namespace Masterpiece.Controllers
         [HttpPost]
         public async Task<IActionResult> CompleteOrder(string firstName, string lastName, string address, string email, string paymentMethod)
         {
-            int? userID = HttpContext.Session.GetInt32("UserId");
+            //int? userID = HttpContext.Session.GetInt32("UserId");
+            int? userID = 1;
 
             if (userID == null)
             {
@@ -328,7 +371,7 @@ namespace Masterpiece.Controllers
 
 
 
-        public IActionResult Index()
+        public IActionResult userData()
         {
             int? userID = HttpContext.Session.GetInt32("UserId");
             if (userID == null)
@@ -343,7 +386,8 @@ namespace Masterpiece.Controllers
                     ProductName = ci.Product.Name,
                     Price = ci.UnitPrice,
                     Quantity = ci.Quantity,
-                    ImageUrl = ci.Product.ImageUrl
+                    ImageUrl = ci.Product.ImageUrl,
+                    //Status = "pending"
                 }).ToList();
 
             var vm = new CheckoutViewModel
@@ -436,7 +480,7 @@ namespace Masterpiece.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Index(CheckoutViewModel model)
+        public async Task<IActionResult> userData(CheckoutViewModel model)
         {
             int? userID = HttpContext.Session.GetInt32("UserId");
             if (userID == null)
@@ -459,6 +503,9 @@ namespace Masterpiece.Controllers
                     Quantity = ci.Quantity,
                     ImageUrl = ci.Product.ImageUrl
                 }).ToList();
+
+                //TempData["OrderSuccess"] = true;
+                //TempData["OrderId"] = newOrder.OrderId;
 
                 return View(model);
             }
@@ -493,6 +540,15 @@ namespace Masterpiece.Controllers
             // Create Order Items
             foreach (var item in cartItems)
             {
+                // Reduce stock
+                item.Product.Stock -= item.Quantity;
+
+                // Optional: Auto-disable product if out of stock
+                if (item.Product.Stock <= 0)
+                {
+                    item.Product.IsActive = false;
+                }
+
                 _context.OrderItems.Add(new OrderItem
                 {
                     OrderId = order.OrderId,
@@ -511,6 +567,8 @@ namespace Masterpiece.Controllers
                 _ => "unknown"
             };
 
+          
+
             // Create Payment record
             _context.Payments.Add(new Payment
             {
@@ -518,7 +576,7 @@ namespace Masterpiece.Controllers
                 UserId = userID.Value,
                 Amount = totalAfterDiscount,
                 Method = model.PaymentMethod,
-                Status = paymentStatus,
+                Status = "Pending",
                 CreatedAt = DateTime.Now
             });
 

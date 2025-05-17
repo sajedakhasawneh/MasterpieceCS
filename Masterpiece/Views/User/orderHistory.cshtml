@@ -7,19 +7,18 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>My Orders</h2>
         <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
-                Filter: All Orders
+            <button class="btn btn-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter: @((Context.Request.Query["sort"] == "asc") ? "Oldest First" : "Newest First")
             </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">All Orders</a></li>
-                <li><a class="dropdown-item" href="#">Last 30 Days</a></li>
-                <li><a class="dropdown-item" href="#">Past Year</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Delivered</a></li>
-                <li><a class="dropdown-item" href="#">Processing</a></li>
-                <li><a class="dropdown-item" href="#">Cancelled</a></li>
+            <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                <li><a class="dropdown-item @(Context.Request.Query["sort"] != "asc" ? "active" : "")" href="?sort=desc">Newest First</a></li>
+                <li><a class="dropdown-item @(Context.Request.Query["sort"] == "asc" ? "active" : "")" href="?sort=asc">Oldest First</a></li>
             </ul>
         </div>
+
+
+
+
     </div>
 
     @foreach (var order in Model)
@@ -47,18 +46,11 @@
                             <h5>@item.ProductName</h5>
                             <p class="text-muted mb-1">Qty: @item.Quantity</p>
                         </div>
-                        <div class="col-md-4 text-end">
-                            <button class="btn btn-outline-primary btn-sm">Buy Again</button>
-                            <button class="btn btn-outline-secondary btn-sm">View Details</button>
-                        </div>
+
                     </div>
                 }
             </div>
 
-            <div class="card-footer bg-white text-end">
-                <button class="btn btn-primary">Track Package</button>
-                <button class="btn btn-outline-success">Leave Review</button>
-            </div>
         </div>
     }
 </div>

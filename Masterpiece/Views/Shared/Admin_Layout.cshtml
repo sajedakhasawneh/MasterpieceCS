@@ -115,15 +115,9 @@
 
         <ul class="sidebar-menu">
             <li>
-                <a href="#" class="active">
-                    <i class="bi bi-speedometer2"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Admin" asp-action="viewUsers">
-                    <i class="bi bi-people"></i>
-                    <span>Users</span>
+                <a asp-controller="Admin" asp-action="viewCategory">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Category</span>
                 </a>
             </li>
             <li>
@@ -133,26 +127,32 @@
                 </a>
             </li>
             <li>
+                <a asp-controller="Admin" asp-action="viewUsers">
+                    <i class="bi bi-people"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li>
                 <a asp-controller="Admin" asp-action="viewOrders">
                     <i class="bi bi-cart"></i>
                     <span>Orders</span>
                 </a>
             </li>
             <li>
-                <a asp-controller="Admin" asp-action="viewCategory">
-                    <i class="bi bi-graph-up"></i>
-                    <span>Category</span>
+                <a asp-controller="Admin" asp-action="specialDesign">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>special Order</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a asp-controller="Admin" asp-action="ContactMessages">
                     <i class="bi bi-envelope"></i>
                     <span>Messages</span>
                     <span class="badge bg-danger float-end mt-1">5</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a asp-controller="User" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>

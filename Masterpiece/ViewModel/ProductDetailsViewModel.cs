@@ -13,6 +13,9 @@ namespace Masterpiece.ViewModel
         public FeedbackInputModel NewFeedback { get; set; }
         public bool UserHasPurchased { get; set; }
 
+        public double AverageRating { get; set; }
+        public int ReviewCount { get; set; }
+
         //public bool CanUserReview { get; set; }  // Based on order history
     }
 

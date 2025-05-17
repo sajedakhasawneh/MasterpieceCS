@@ -32,6 +32,37 @@ namespace Masterpiece.Controllers
 
 
 
+        //public IActionResult singleProduct(int id)
+        //{
+        //    var product = _context.Products.FirstOrDefault(p => p.Id == id);
+        //    if (product == null) return NotFound();
+
+        //    var reviews = _context.Reviews
+        //        .Where(r => r.ProductId == id)
+        //        .Include(r => r.User)
+        //        .ToList();
+
+        //    var userId = HttpContext.Session.GetInt32("UserId");
+        //    bool userHasPurchased = _context.Orders
+        //        .Include(o => o.OrderItems)
+        //        .Any(o => o.UserId == userId &&
+        //                  o.OrderItems.Any(oi => oi.ProductId == id));
+
+        //    var vm = new ProductDetailsViewModel
+        //    {
+        //        Product = product,
+        //        Reviews = reviews,
+        //        UserHasPurchased = userHasPurchased,
+        //        NewFeedback = new FeedbackInputModel
+        //        {
+        //            ProductId = product.Id
+        //        }
+        //    };
+
+        //    return View(vm);
+        //}
+
+
         public IActionResult singleProduct(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
@@ -48,11 +79,16 @@ namespace Masterpiece.Controllers
                 .Any(o => o.UserId == userId &&
                           o.OrderItems.Any(oi => oi.ProductId == id));
 
+            var averageRating = reviews.Any() ? reviews.Average(r => r.Rating) : 0;
+            var reviewCount = reviews.Count;
+
             var vm = new ProductDetailsViewModel
             {
                 Product = product,
                 Reviews = reviews,
                 UserHasPurchased = userHasPurchased,
+                AverageRating = averageRating,
+                ReviewCount = reviewCount,
                 NewFeedback = new FeedbackInputModel
                 {
                     ProductId = product.Id
@@ -61,176 +97,6 @@ namespace Masterpiece.Controllers
 
             return View(vm);
         }
-
-
-        //public IActionResult singleProduct(int id)
-        //{
-        //var prdoductbyId = _context.Products.Where(product => product.Id == id).ToList();
-        //return View();
-
-        //// Fetch product from the database by ID
-        //var product = _context.Products
-        //    .Where(p => p.Id == id)
-        //    .Include(p => p.Reviews)
-        //    .FirstOrDefault();
-
-        //// If product not found, return NotFound (404)
-        //if (product == null)
-        //{
-        //    return NotFound();
-        //}
-
-        //// Pass the product to the view
-        //return View(product);
-
-
-        //    var product = _context.Products.FirstOrDefault(p => p.Id == id);
-        //    if (product == null) return NotFound();
-
-        //    var reviews = _context.Reviews
-        //        .Where(r => r.ProductId == id)
-        //        .Include(r => r.User)
-        //        .ToList();
-
-        //    var userId = HttpContext.Session.GetInt32("UserId"); // from Identity
-        //    bool userHasPurchased = _context.Orders
-        //        .Include(o => o.OrderItems)
-        //        .Any(o => o.UserId == userId &&
-        //                  o.OrderItems.Any(oi => oi.ProductId == id));
-
-        //    var vm = new ProductDetailsViewModel
-        //    {
-        //        Product = product,
-        //        Reviews = reviews,
-        //        UserHasPurchased = userHasPurchased
-        //    };
-
-        //    return View(vm);
-        //}
-
-
-        //public IActionResult getReview(int id)
-        //{
-        //    var product = _context.Products.FirstOrDefault(p => p.Id == id);
-        //    if (product == null) return NotFound();
-
-        //    var reviews = _context.Reviews
-        //        .Where(r => r.ProductId == id)
-        //        .Include(r => r.User)
-        //        .ToList();
-
-        //    var userId = HttpContext.Session.GetInt32("UserId"); // from Identity
-        //    bool userHasPurchased = _context.Orders
-        //        .Include(o => o.OrderItems)
-        //        .Any(o => o.UserId == userId &&
-        //                  o.OrderItems.Any(oi => oi.ProductId == id));
-
-        //    var vm = new ProductDetailsViewModel
-        //    {
-        //        Product = product,
-        //        Reviews = reviews,
-        //        UserHasPurchased = userHasPurchased
-        //    };
-
-        //    return View(vm);
-        //}
-
-
-        //[HttpPost]
-        //public IActionResult addReview(int productId, string comment, int rating)
-        //{
-        //         int? userId = HttpContext.Session.GetInt32("UserId");
-
-        //    if (userId == null)
-        //    {
-        //        return RedirectToAction("Register", "User");
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Get product by ID
-        //        var product =  _context.Products
-        //            .FirstOrDefault(p => p.Id == productId);
-
-        //        if (product == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        // Get all reviews for the product
-        //        var reviews = _context.Reviews
-        //            .Where(r => r.ProductId == productId)
-        //            .OrderByDescending(r => r.CreatedAt)
-        //            .ToList();
-
-        //        // Check if the user has purchased the product
-        //         // Replace with your actual method for getting current user ID
-        //        var userHasPurchased =  _context.Orders
-        //            .Include(o => o.OrderItems)
-        //            .Any(o => o.UserId == userId &&
-        //                           o.OrderItems.Any(oi => oi.ProductId == productId) &&
-        //                           o.Status == "Completed");
-
-        //        // Pass data to ViewModel
-        //        var vm = new ProductDetailsViewModel
-        //        {
-        //            Product = product,
-        //            Reviews = reviews,
-        //            UserHasPurchased = userHasPurchased
-        //        };
-
-        //        //return View(vm);
-        //    }
-        //        //     var hasPurchased = _context.OrderItems
-        //        //     .Include(oi => oi.Order)
-        //        //.Any(oi => oi.ProductId == productId && oi.Order.UserId == userId);
-
-        //        //     if (!hasPurchased)
-        //        //     {
-        //        //         return Forbid("You must purchase the product to leave a review.");
-        //        //     }
-
-        //        //     var review = new Review
-        //        //     {
-        //        //         UserId = userId.Value,
-        //        //         ProductId = productId,
-        //        //         Comment = comment,
-        //        //         Rating = rating,
-        //        //         CreatedAt = DateTime.Now
-        //        //     };
-
-        //        //     _context.Reviews.Add(review);
-        //        //     _context.SaveChanges();
-
-        //        //     return RedirectToAction("singleProduct", "services", new { id = productId });
-
-        //        //var userId = GetCurrentUserId();
-        //        //var hasPurchased = _context.Orders
-        //        //    .Include(o => o.OrderItems)
-        //        //    .Any(o => o.UserId == userId &&
-        //        //              o.OrderItems.Any(oi => oi.ProductId == productId));
-
-        //        //if (!hasPurchased)
-        //        //{
-        //        //    return Unauthorized("Only verified buyers can leave a review.");
-        //        //}
-
-
-
-        //        var review = new Review
-        //    {
-        //        ProductId = productId,
-        //        UserId = userId ?? 0,
-        //        Rating = rating,
-        //        Comment = comment,
-        //        CreatedAt = DateTime.Now
-        //    };
-
-        //    _context.Reviews.Add(review);
-        //    _context.SaveChanges();
-
-        //    return RedirectToAction("singleProduct", new { id = productId });
-        //}
 
 
         [HttpPost]
@@ -282,7 +148,7 @@ namespace Masterpiece.Controllers
                 UserId = userId.Value,
                 Rating = model.Rating,
                 Comment = model.Comment,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now.Date
             };
 
             _context.Reviews.Add(review);
@@ -291,80 +157,6 @@ namespace Masterpiece.Controllers
             return RedirectToAction("singleProduct", new { id = model.ProductId });
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpPost]
-        //public IActionResult AddReview(int productId, string comment, int rating)
-        //{
-        //    int? userId = HttpContext.Session.GetInt32("UserId");
-
-        //    if (userId == null)
-        //    {
-        //        return RedirectToAction("Register", "User");
-        //    }
-
-        //    // Check if user has purchased the product
-        //    bool userHasPurchased = _context.Orders
-        //        .Include(o => o.OrderItems)
-        //        .Any(o => o.UserId == userId &&
-        //                  o.OrderItems.Any(oi => oi.ProductId == productId) &&
-        //                  o.Status == "delivered");
-
-        //    if (!userHasPurchased)
-        //    {
-        //        // User is not allowed to post review — show product page again
-        //        var product = _context.Products.FirstOrDefault(p => p.Id == productId);
-        //        var reviews = _context.Reviews
-        //            .Where(r => r.ProductId == productId)
-        //            .OrderByDescending(r => r.CreatedAt)
-        //            .ToList();
-
-        //        var vm = new ProductDetailsViewModel
-        //        {
-        //            Product = product,
-        //            Reviews = reviews,
-        //            UserHasPurchased = false,
-        //        };
-
-        //        ViewBag.Error = "Only verified buyers can leave a review.";
-        //        return View("SingleProduct", vm); // IMPORTANT: Return the product page view
-        //    }
-
-        //    // Save review
-        //    var review = new Review
-        //    {
-        //        ProductId = productId,
-        //        UserId = userId.Value,
-        //        Rating = rating,
-        //        Comment = comment,
-        //        CreatedAt = DateTime.Now
-        //    };
-
-        //    _context.Reviews.Add(review);
-        //    _context.SaveChanges();
-
-        //    return RedirectToAction("SingleProduct", new { id = productId });
-        //}
-
-
-        //public IActionResult getAllProducts()
-        //{
-        //    var products = _context.Products.ToList();
-        //    return View(products);
-        //}
         public IActionResult getAllProducts(List<int> CategoryIds, List<int> Ratings, int? MaxPrice, string SortOrder)
         { 
         

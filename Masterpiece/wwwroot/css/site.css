@@ -507,3 +507,12 @@ img {
         }
 }
 
+.primary-btn {
+    background: #3E433B;
+    color: #F6F4F0;
+}
+
+.secondary-btn {
+    background: #5F6759;
+    color: #F6F4F0;
+}

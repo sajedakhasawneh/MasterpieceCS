@@ -3,216 +3,66 @@
     ViewData["Title"] = "Index";
 }
 
-@* <!-- Hero Section --> *@
-@* <div class="hero"> *@
-@*     <h1>Contact Us</h1> *@
-@*     <p>Have a questions, feedback or need support?  We’re here to help! Feel free to contact us using the form below or via the provided details.</p> *@
-@* </div> *@
-@*         <div class="section3formNews"> *@
-@*             <div>                 *@
-@*                 <form asp-action="contact" id="contactForm" method="post" class="formdiv"> *@
-@*                     <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
-@*                         <div class="formflex"> *@
-@*                         <input type="text" class="contactInput" placeholder="Full Name" required> *@
-@*                         <input type="text" class="contactInput" placeholder="Phone" required> *@
-@*                     </div> *@
-
-@*                     <div class="formflex"> *@
-@*                         <input type="email" class="contactInput" placeholder="Email" required> *@
-@*                         <input type="text" class="contactInput" asp-for="Subject" required> *@
-@*                         <span asp-validation-for="Subject" class="text-danger"></span> *@
-@*                     </div> *@
-        
-
-@*                     <div> *@
-@*                     <textarea asp-for="Message" class="control-label" placeholder="Write your message" required></textarea> *@
-@*                     <span asp-validation-for="Message" class="text-danger"></span> *@
-@*                     </div> *@
-@*                     <input type="submit" value="Send" class="btn"> *@
-@*                 </form> *@
-@*             </div> *@
-
-@*             <div class="newsLetter"> *@
-@*                 <div class="newsLetterHead"> *@
-@*                     <h3>Our Newsletter</h3> *@
-@*                     <p>Stay updated with the latest news and exclusive offers. Subscribe now to never miss a thing!</p> *@
-@*                 </div> *@
-
-@*         <form> *@
-@*             <input type="email" class="inputNewsletter emailNews" placeholder="Email"><br><br> *@
-@*             <input type="submit" value="send" id="btnNews" class="inputNewsletter"> *@
-@*         </form> *@
-@*     </div> *@
-@* </div> *@
-
-
-@* <section class="section-services"> *@
-@*         <div class="row"> *@
-@*             <!-- Single Service --> *@
-@*             <div class="col-md-6 col-lg-4"> *@
-@*                 <div class="single-service"> *@
-@*                     <div class="content"> *@
-@*                         <i class="fa fa-phone-square" aria-hidden="true" class="icon" style=" font-size: 50px; color: #3E4235;"></i> *@
-@*                         <h3 class="title">+962 7000000000</h3> *@
-@*                         <p class="description">Reach us directly for immediate assistance. We’re available during business hours.</p> *@
-@*                     </div> *@
-@*                     <span class="circle-before"></span> *@
-@*                 </div> *@
-@*             </div> *@
-@*             <!-- / End Single Service --> *@
-@*             <!-- Single Service --> *@
-@*             <div class="col-md-6 col-lg-4"> *@
-@*                 <div class="single-service"> *@
-@*                     <div class="content"> *@
-@*                         <i class="fa fa-envelope" aria-hidden="true" class="icon" style=" font-size: 50px; color: #3E4235;"></i> *@
-@*                         <h3 class="title">company@company.com</h3> *@
-@*                         <p class="description">Drop us a line, and we’ll respons within 24 hours. For inquiries, support of feedback.</p> *@
-@*                     </div> *@
-@*                     <span class="circle-before"></span> *@
-@*                 </div> *@
-@*             </div> *@
-@*             <!-- / End Single Service --> *@
-@*             <!-- Single Service --> *@
-@*             <div class="col-md-6 col-lg-4"> *@
-@*                 <div class="single-service"> *@
-@*                     <div class="content"> *@
-
-@*                         <i class="fa fa-map-marker" aria-hidden="true" class="icon" style=" font-size: 50px; color: #3E4235;"></i> *@
-@*                         <h3 class="title">Irbid, Jordan</h3> *@
-@*                         <p class="description">Visit us at our location for in-person support. Open weekdays form 9 AM to 9 PM.</p> *@
-@*                     </div> *@
-@*                     <span class="circle-before"></span> *@
-@*                 </div> *@
-@*             </div> *@
-@*             <!-- / End Single Service --> *@
-
-@*         </div> *@
-@*     </div> *@
-@* </section> *@
-
-
-
-
-@* <div class="map"> *@
-@*     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.0095603888158!2d35.847093875112236!3d32.55259009542249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c7715f2c2e7ab%3A0x51755840c8ddbefd!2sOrange%20Digital%20Village%20Irbid!5e0!3m2!1sen!2sjo!4v1737316007263!5m2!1sen!2sjo" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
-@* </div> *@
-
-
-
-
-
-
-
-
-
-    <!-- Page Header -->
-    <header class="bg-light py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1 class="display-4">Contact Us</h1>
-                    <p class="lead">We'd love to hear from you</p>
+<main class="py-5">
+    <div class="container-fluid">
+        <div class="container-xxl py-6">
+            <div class="container-fluid">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <h1 class="display-6 mb-4">If You Have Any Query, Please Contact Us</h1>
                 </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="py-5">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Contact Information -->
-                <div class="col-lg-4">
-                    <div class="card contact-info-card shadow-sm mb-4">
-                        <div class="card-body text-center">
-                            <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
-                            <h4 class="card-title">Our Address</h4>
-                            <p class="card-text"><br>Irbid</p>
-                        </div>
-                    </div>
-
-                    <div class="card contact-info-card shadow-sm mb-4">
-                        <div class="card-body text-center">
-                            <i class="fas fa-phone fa-3x text-primary mb-3"></i>
-                            <h4 class="card-title">Call Us</h4>
-                            <p class="card-text">
-                            <a href="tel:+18005551234" class="text-decoration-none">+962 798902468</a><br>
-                                @* Mon-Fri, 9am-5pm *@
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card contact-info-card shadow-sm mb-4">
-                        <div class="card-body text-center">
-                            <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
-                            <h4 class="card-title">Email Us</h4>
-                            <p class="card-text">
-                                <a href="mailto:info@mycompany.com" class="text-decoration-none">info@Basma.com</a><br>
-                                @* <a href="mailto:support@mycompany.com" class="text-decoration-none">support@mycompany.com</a> *@
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="col-lg">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h3 class="card-title mb-4">Send us a message</h3>
-                            <form asp-action="contact" id="contactForm" method="post">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="firstName" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label">Phone (Optional)</label>
-                                        <input type="tel" class="form-control" id="phone">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="subject" class="form-label">Subject</label>
-                                        <input type="text" class="form-control" asp-for="Subject" required>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="message" class="form-label">Message</label>
-                                        <textarea class="form-control" asp-for="Message" rows="5" required></textarea>
-                                    </div>
-                                    @* <div class="col-12"> *@
-                                    @*     <div class="form-check"> *@
-                                    @*         <input class="form-check-input" type="checkbox" id="agreeTerms" required> *@
-                                    @*         <label class="form-check-label" for="agreeTerms"> *@
-                                    @*             I agree to the terms and conditions *@
-                                    @*         </label> *@
-                                    @*     </div> *@
-                                    @* </div> *@
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                <div class="row g-0 justify-content-center">
+                    <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                        @* <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> *@
+                        <form asp-action="contact" id="contactForm" method="post">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                        <label for="name">Your Name</label>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Map Section -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <h3 class="mb-4">Find Us on the Map</h3>
-                    <div class="map-container shadow-sm">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215573291234!2d-73.9878449242392!3d40.74844097138972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1681234567890!5m2!1sen!2sus"
-                                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" asp-for="Subject" required>
+                                        <label for="subject">Subject</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" asp-for="Message" style="height: 200px" required></textarea>
+                                        <label for="message">Message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-send col-8" type="submit">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
 
+        <!-- Map Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4">Find Us on the Map</h3>
+                <div class="map-container shadow-sm">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.0095603888158!2d35.847093875112236!3d32.55259009542249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c7715f2c2e7ab%3A0x51755840c8ddbefd!2sOrange%20Digital%20Village%20Irbid!5e0!3m2!1sen!2sjo!4v1737316007263!5m2!1sen!2sjo"
+                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

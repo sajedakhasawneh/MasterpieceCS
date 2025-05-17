@@ -1,0 +1,112 @@
+﻿.design-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://marybird.org/wp-content/uploads/2022/01/2-scaled.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    margin-bottom: 30px;
+}
+
+.form-section {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.feature-icon {
+    font-size: 30px;
+    color: #5F6759;
+    margin-bottom: 15px;
+}
+
+.category-badge {
+    background-color: #f8f9fa;
+    color: #212529;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #dee2e6;
+}
+
+    .category-badge:hover, .category-badge.active {
+        background-color: #e9ecef;
+        border-color: #adb5bd;
+    }
+
+.upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 1rem;
+}
+
+    .upload-area:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+    }
+
+.design-preview {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border: 2px dashed #dee2e6;
+}
+
+    .design-preview img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 5px;
+    }
+
+
+.category-badge {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    transition: background-color 0.3s, border 0.3s;
+    border: 2px solid transparent;
+}
+
+    .category-badge.selected {
+        background: #b6bfac;
+        color: #F6F4F0;
+    }
+
+    .category-badge input[type="radio"] {
+        display: none;
+    }
+
+.btn-primary {
+    border: none;
+    color: #F6F4F0;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #5F6759;
+    transition: all 0.6s ease-in-out;
+}
+
+.secondary-btn {
+    background: #5F6759;
+    color: #F6F4F0;
+}
+
+i {
+    color: #5F6759;
+}

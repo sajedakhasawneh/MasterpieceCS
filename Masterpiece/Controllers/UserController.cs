@@ -200,21 +200,27 @@ namespace Masterpiece.Controllers
         
         }
 
-
-        public IActionResult orderHistory()
+        public IActionResult orderHistory(string sort = "desc")
         {
-
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
                 return RedirectToAction("Register", "User");
 
-            var orders = _context.Orders
+            // Start building the query
+            IQueryable<Order> ordersQuery = _context.Orders
                 .Where(o => o.UserId == userId)
                 .Include(o => o.OrderItems)
-                    .ThenInclude(oi => oi.Product)
-                .OrderByDescending(o => o.CreatedAt)
-                .ToList();
+                    .ThenInclude(oi => oi.Product);
 
+            // Apply sorting AFTER includes
+            ordersQuery = sort == "asc"
+                ? ordersQuery.OrderBy(o => o.CreatedAt)
+                : ordersQuery.OrderByDescending(o => o.CreatedAt);
+
+            // Execute query
+            var orders = ordersQuery.ToList();
+
+            // Map to ViewModel
             var viewModel = orders.Select(o => new UserOrderViewModel
             {
                 OrderId = o.OrderId,
@@ -232,6 +238,7 @@ namespace Masterpiece.Controllers
 
             return View(viewModel);
         }
+
 
 
 

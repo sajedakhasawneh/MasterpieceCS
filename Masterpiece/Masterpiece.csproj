@@ -20,11 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\services\AllProducts - Copy.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\services\singleProduct - Copy.cshtml">
+    <Content Update="Views\payment\Confirmation - Copy.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

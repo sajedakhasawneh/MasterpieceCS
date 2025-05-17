@@ -20,18 +20,29 @@
     }
 
 /******************************/
-.img-twice::before {
-    position: absolute;
-    content: "";
-    width: 60%;
-    height: 80%;
-    top: 10%;
-    left: 20%;
-    background: var(--primary);
-    border: 25px solid var(--light);
-    border-radius: 6px;
-    z-index: -1;
+.img-twice {
+    position: relative;
+    /*min-height: 600px;*/ /* Ensure it has height */
 }
+
+    .img-twice::before {
+        content: "";
+        position: absolute;
+        top: 20%;
+        left: 15%;
+        width: 60%;
+        height: 50%;
+        background: #5F6759;
+        border: 25px solid #F5EFE7;
+        border-radius: 6px;
+        z-index: -1; /* Background */
+    }
+
+    .img-twice .z-1 {
+        position: relative;
+        z-index: 1; /* Ensure images appear on top */
+    }
+
 
 /**************Gallery***************/
 .galleryimg {

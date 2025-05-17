@@ -1,0 +1,66 @@
+﻿@model Masterpiece.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "/Views/Shared/Owner_Layout.cshtml";
+}
+
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="container mt-4">
+                        <h2>Edit Product</h2>
+                        <form asp-action="editProduct">
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Description" class="form-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Price" class="form-label"></label>
+                                <input asp-for="Price" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Stock" class="form-label"></label>
+                                <input asp-for="Stock" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="CategoryId" class="form-label"></label>
+                                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="ImageUrl" class="form-label"></label>
+                                <input asp-for="ImageUrl" class="form-control" />
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" asp-for="IsActive" />
+                                <label class="form-check-label" asp-for="IsActive">
+                                    Active (Uncheck to disable)
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                            <a asp-action="MyProducts" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

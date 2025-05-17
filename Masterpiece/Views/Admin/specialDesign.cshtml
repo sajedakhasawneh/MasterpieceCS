@@ -1,0 +1,71 @@
+﻿@model List<Masterpiece.Models.SpecialOrder>
+
+@{
+    ViewData["Title"] = "Special Orders";
+    Layout = "/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="main-content">
+    
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Special Orders</h2>
+        <a class="btn btn-outline-primary" asp-action="Create">+ New Order</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No special orders found.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Img</th>
+                        <th>Category</th>
+                        <th>Occasion</th>
+                        <th>Needed By</th>
+                        <th>Customer</th>
+                        <th>Email</th>
+                        <th>Budget</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (!string.IsNullOrEmpty(order.Img))
+                                {
+                                    <img src="@order.Img" alt="Image" style="max-height: 100px;" />
+                                }
+                                else
+                                {
+                                    <span>No image</span>
+                                }
+                            </td>
+
+                            <td>@order.ProductType</td>
+                            <td>@order.Occuaion</td>
+                            <td>@order.Delivery</td>
+                            <td>@order.User.Name</td>
+                            <td>
+                                <a href="mailto:@order.User.Email">@order.User.Email</a>
+                            </td>
+                            <td>
+                                <span class="text-success fw-bold">@order.Price </span> -
+                                <span class="text-danger fw-bold">@order.Budget JOD</span>
+                            </td>
+                            <td>@(order.Details ?? "—")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+</div>

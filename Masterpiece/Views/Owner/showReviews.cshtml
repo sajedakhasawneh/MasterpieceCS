@@ -1,0 +1,53 @@
+﻿@model List<Masterpiece.ViewModel.ProductReviewViewModel>
+
+@{
+    ViewData["Title"] = "Product Reviews";
+    Layout = "/Views/Shared/Owner_Layout.cshtml";
+}
+
+
+<div class="main-content">
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div class="container mt-4">
+                        <h2 class="mb-4">Reviews on Your Products</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Reviewed By</th>
+                                    <th>Rating</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var review in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="@review.ProductImage" width="50" height="50" class="me-2" />
+                                                @review.ProductName
+                                            </div>
+                                        </td>
+                                        <td>@review.CategoryName</td>
+                                        <td>@review.UserName</td>
+                                        <td>@review.Rating</td>
+                                        <td>@review.Comment</td>
+                                        <td>@review.CreatedAt?.ToString("yyyy-MM-dd")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

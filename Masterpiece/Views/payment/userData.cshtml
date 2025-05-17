@@ -1,0 +1,219 @@
+﻿@model Masterpiece.ViewModel.CheckoutViewModel
+
+<div class="checkout-container">
+    <div class="checkout-header">
+        <h1 class="checkout-title">Checkout</h1>
+        <div class="checkout-progress">
+            <div class="step active"><span>1</span> Information</div>
+            <div class="step"><span>2</span> Payment</div>
+            <div class="step"><span>3</span> Confirmation</div>
+        </div>
+    </div>
+
+    <form asp-action="userData" method="post" class="checkout-form">
+        @Html.AntiForgeryToken()
+
+        <div class="checkout-grid">
+            <!-- Customer Information Section -->
+            <div class="customer-info">
+                <h2 class="section-title">Customer Information</h2>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="form-label">Full Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter your full name" />
+                    <span asp-validation-for="Name" class="validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-control" placeholder="your@email.com" />
+                    <span asp-validation-for="Email" class="validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Address" class="form-label">Shipping Address</label>
+                    <input asp-for="Address" class="form-control" placeholder="Street address, city, ZIP code" />
+                    <span asp-validation-for="Address" class="validation-error"></span>
+                </div>
+
+                <div class="payment-method">
+                    <h2 class="section-title">Payment Method</h2>
+                    <div class="form-group">
+                        <label asp-for="PaymentMethod" class="form-label">Select Payment Option</label>
+                        <select asp-for="PaymentMethod" class="form-select">
+                            <option value="Cash">Cash on Delivery</option>
+                            <option value="credit card">Credit/Debit Card</option>
+                            <option value="PayPal">PayPal</option>
+                        </select>
+                    </div>
+
+
+                    <div id="cardDetails" class="form-group card-details" style="display: none;">
+                        <div class="form-group">
+                            <label for="CardName" class="form-label">Name on Card</label>
+                            <input type="text" id="CardName" name="CardName" class="form-control" placeholder="Name as it appears on your card" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="CardNumber" class="form-label">Card Number</label>
+                            <input type="text" id="CardNumber" name="CardNumber" class="form-control" placeholder="•••• •••• •••• ••••" />
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ExpiryDate" class="form-label">Expiry Date (MM/YYYY)</label>
+                                <input type="text" id="ExpiryDate" name="ExpiryDate" class="form-control" placeholder="MM/YYYY" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="CVC" class="form-label">CVC</label>
+                                <input type="text" id="CVC" name="CVC" class="form-control" placeholder="CVC" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group voucher-group">
+                        <label asp-for="VoucherCode" class="form-label">Promo Code</label>
+                        <div class="voucher-input">
+                            <input asp-for="VoucherCode" class="form-control" id="voucherCode" placeholder="Enter promo code" />
+                            <button type="button" class="voucher-apply" id="applyVoucher">Apply</button>
+                        </div>
+                        <div class="voucher-feedback" id="voucherFeedback"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Order Summary Section -->
+            <div class="order-summary">
+                <div class="summary-card">
+                    <h2 class="section-title">Order Summary</h2>
+
+                    <div class="items-list" id="orderSummary">
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <div class="cart-item">
+                                <div class="item-info">
+                                    <h4>@item.ProductName</h4>
+                                    <p>Qty: @item.Quantity × $@item.Price</p>
+                                </div>
+                                <div class="item-price">$@(item.Price * item.Quantity)</div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="totalBeforeDiscount">$@Model.TotalBeforeDiscount</span>
+                        </div>
+
+                        <div class="total-row discount-row" id="discountRow" style="display:none;">
+                            <span>Discount</span>
+                            <span class="discount-value" id="discountAmount">-@Model.DiscountAmount</span>
+                        </div>
+
+                        <div class="total-row grand-total" id="totalAfterRow" style="display:none;">
+                            <span>Total</span>
+                            <span id="totalAfterDiscount">@Model.TotalAfterDiscount</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="checkout-button">Complete Order</button>
+
+                    <div class="security-info">
+                        <div class="security-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                            </svg>
+                            Secure Checkout
+                        </div>
+                        <p class="guarantee-text">100% Satisfaction Guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#applyVoucher').click(function() {
+                var voucherCode = $('#voucherCode').val();
+                var feedback = $('#voucherFeedback');
+
+                if (!voucherCode) {
+                    feedback.text('Please enter a voucher code').css('color', 'var(--error-color)');
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("ApplyVoucher", "payment")',
+                    type: 'POST',
+                    data: { voucherCode: voucherCode },
+                    beforeSend: function() {
+                        feedback.text('Applying...').css('color', 'var(--text-color)');
+                    },
+                    success: function(data) {
+                        console.log('AJAX response received:', data);
+
+                        if (data.success) {
+                            $('#totalBeforeDiscount').text('$' + data.totalBeforeDiscount.toFixed(2));
+                            $('#discountAmount').text('-$' + data.discountAmount.toFixed(2));
+                            $('#totalAfterDiscount').text('$' + data.totalAfterDiscount.toFixed(2));
+
+                            if (data.discountAmount > 0) {
+                                $('#discountRow').show();
+                                $('#totalAfterRow').show();
+                                feedback.text('Voucher applied successfully!').css('color', 'var(--success-color)');
+                            } else {
+                                $('#discountRow').hide();
+                                $('#totalAfterRow').hide();
+                                feedback.text('This voucher provides no discount').css('color', 'var(--light-text)');
+                            }
+                        } else {
+                            $('#discountRow').hide();
+                            $('#totalAfterRow').hide();
+                            feedback.text(data.message || 'Invalid voucher code').css('color', 'var(--error-color)');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log('AJAX error:', textStatus, errorThrown);
+                        feedback.text('Error applying voucher').css('color', 'var(--error-color)');
+                    }
+                });
+            });
+
+            // Also trigger on Enter key in voucher field
+            $('#voucherCode').keypress(function(e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    $('#applyVoucher').click();
+                }
+            });
+
+                    $('#PaymentMethod').change(function () {
+            var selectedMethod = $(this).val();
+            if (selectedMethod === 'Card') {
+                $('#cardDetails').slideDown();
+            } else {
+                $('#cardDetails').slideUp();
+            }
+        });
+
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

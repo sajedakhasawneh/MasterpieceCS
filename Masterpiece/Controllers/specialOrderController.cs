@@ -1,17 +1,22 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Security.Claims;
 using Masterpiece.Models;
+using Masterpiece.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace Masterpiece.Controllers
 {
     public class specialOrderController : Controller
     {
         private readonly MyDbContext _context;
-        public specialOrderController(MyDbContext context)
+        private readonly IWebHostEnvironment _environment;
+        public specialOrderController(MyDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -21,53 +26,90 @@ namespace Masterpiece.Controllers
 
         public IActionResult specialForm()
         {
-           
-            return View();
+
+            var dbOccasions = _context.SpecialOrders
+                .Where(o => o.Occuaion != null)
+                .Select(o => o.Occuaion!)
+                .Distinct()
+                .ToList();
+
+            // fallback to known allowed values
+            var fallbackOccasions = new List<string> { "Wedding", "Birthday", "Graduation", "Corporate Gift" };
+
+            var viewModel = new SpecialOrderViewModel
+            {
+                Categories = _context.Categories.Select(c => c.Name).ToList(),
+                Occasions = dbOccasions.Any() ? dbOccasions : fallbackOccasions
+            };
+
+            return View(viewModel);
         }
 
-        //[HttpPost]
-        //public IActionResult SpecialForm(SpecialOrder specialOrder)
-        //{
-        //   if (ModelState.IsValid)
-        //    {
-        //        specialOrder.CreatedAt = DateTime.Now;
-        //        _context.SpecialOrders.Add(specialOrder);
-        //        _context.SaveChanges();
-        //        //Json(new { success = true, message = "Sent successfully!" });
-        //    }
-        //    //return Json(new { success = false, message = "An error occurred while sending!" });
-        //    return View();
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult specialForm(SpecialOrder order)
+        public IActionResult specialForm(SpecialOrderViewModel model)
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            int? userID = HttpContext.Session.GetInt32("UserId");
 
-            if (userId == null)
+            if (userID == null)
             {
-                ModelState.AddModelError("", "User is not logged in.");
-                return View(order);
+                // Redirect to login if session is not set
+                return RedirectToAction("Register", "User");
+            }
+
+            var listItem = new SpecialOrderViewModel
+            {
+                Occasions = new List<string> { "Wedding", "Birthday", "Graduation", "Corporate Gift" },
+                Categories = _context.Categories.Select(c => c.Name).ToList()
+            };
+
+
+            string? imagePath = null;
+
+            if (model.DesignUpload != null && model.DesignUpload.Length > 0)
+            {
+                var uploads = Path.Combine(_environment.WebRootPath, "uploads");
+                Directory.CreateDirectory(uploads);
+                var fileName = Guid.NewGuid() + Path.GetExtension(model.DesignUpload.FileName);
+                var filePath = Path.Combine(uploads, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.DesignUpload.CopyTo(stream);
+                }
+
+                imagePath = "/uploads/" + fileName;
             }
 
             if (ModelState.IsValid)
             {
-                order.UserId = userId.Value;
-                order.CreatedAt = DateTime.Now;
-                order.Status = "pending";
+
+                var order = new SpecialOrder
+                {
+                    UserId = userID ?? 0, // Replace with logged-in user's ID
+                    Details = model.DesignDescription ?? "",
+                    Status = "Pending",
+                    CreatedAt = DateTime.Now,
+                    Img = imagePath,
+                    Occuaion = model.ProductOccasion,
+                    ProductType = model.SelectedCategory,
+                    Delivery = model.NeededBy != null ? DateOnly.FromDateTime(model.NeededBy.Value) : null,
+                    Budget = model.MaxBudget, // storing max budget as the primary "Budget" field
+                    Price = model.MinBudget ?? 0  // store min budget in "Price"
+                };
+
 
                 _context.SpecialOrders.Add(order);
-                _context.SaveChanges();
-
-                return RedirectToAction("Index");
+                 _context.SaveChanges();
             }
-
-            return View(order);
+            return RedirectToAction("Success");
         }
 
-
-
+        public IActionResult Success()
+        {
+            return View();
+        }
 
 
     }

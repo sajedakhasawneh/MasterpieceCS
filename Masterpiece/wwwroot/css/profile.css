@@ -60,6 +60,7 @@
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
+
 }
 
     .profile-card:hover {
@@ -115,3 +116,35 @@
 .nav-pills .nav-link {
     color: #333;
 }
+
+
+button.btn.btn-primary {
+    /*    background: #5F6759;
+    color: #F6F4F0;
+    border:none*/
+
+    color: #F6F4F0;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    margin-top: 20px;
+    background-color: #5F6759;
+    transition: all 0.6s ease-in-out;
+}
+.btn-outline-secondary {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    margin-top: 20px;
+    transition: all 0.6s ease-in-out;
+}
+
+/*.dropdown-item {
+    background-color: #5F6759 !important;
+    ;*/ /* Green example */
+    /*color: #F6F4F0;
+}*/
